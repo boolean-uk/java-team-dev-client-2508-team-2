@@ -52,7 +52,7 @@ async function request(method, endpoint, data, auth = true) {
   if (!response.ok) {
     const text = await response.text();
     const dataResponse = text ? JSON.parse(text) : {};
-    throw new Error(dataResponse.error || response.statusText);
+    throw new Error(dataResponse.message || response.statusText);
   }
 
   return response.json();

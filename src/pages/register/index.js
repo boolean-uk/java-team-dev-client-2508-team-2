@@ -14,7 +14,10 @@ const Register = () => {
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    if (name === 'password' && value.length < 8) {
+    if (
+      name === 'password' &&
+      (value.length < 8 || !hasUpperCase(value) || !hasSpecialChar(value) || !hasNumber(value))
+    ) {
       setPasswordError(
         'The password needs to be at leats eight characters, including at least one capital letter, one number and one special character'
       );
@@ -23,11 +26,32 @@ const Register = () => {
     }
   };
 
+  function hasUpperCase(str) {
+    return str !== str.toLowerCase();
+  }
+
+  function hasSpecialChar(str) {
+    const regex = /[!@#$%^&*()\-+={}[\]:;"'<>,.?\\/|\\]/;
+    if (regex.test(str)) {
+      return true;
+    }
+  }
+
+  function hasNumber(str) {
+    const regex = /[0-9]/;
+    if (regex.test(str)) {
+      return true;
+    }
+  }
+
   function onSubmit() {
-    onRegister(formData.email, formData.password).catch((e) => {
-      console.error('Email already exists');
-      setEmailError('Email already exists');
-    });
+    if (!passwordError) {
+      onRegister(formData.email, formData.password).catch((e) => {
+        console.error(e.message);
+        setEmailError(e.message);
+        setFormData({ email: '', password: '' });
+      });
+    }
   }
 
   return (
@@ -47,16 +71,16 @@ const Register = () => {
               type="email"
               name="email"
               label={'Email *'}
+              errorMessage={emailError}
             />
-            {emailError && <p readOnly={true}>{emailError}</p>}
             <TextInput
               value={formData.password}
               onChange={onChange}
               name="password"
               label={'Password *'}
               type={'password'}
+              errorMessage={passwordError}
             />
-            {passwordError && <p readOnly={true}>{passwordError}</p>}
           </form>
           <Button text="Sign up" onClick={onSubmit} classes="green width-full" />
         </div>

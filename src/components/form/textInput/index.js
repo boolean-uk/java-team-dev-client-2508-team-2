@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
+const TextInput = ({ value, onChange, name, label, icon, type = 'text', errorMessage = '' }) => {
   const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
   if (type === 'password') {
@@ -26,6 +26,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
         >
           <EyeLogo />
         </button>
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       </div>
     );
   } else {
@@ -40,6 +41,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text' }) => {
           className={icon && 'input-has-icon'}
         />
         {icon && <span className="input-icon">{icon}</span>}
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       </div>
     );
   }
