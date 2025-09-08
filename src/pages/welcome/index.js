@@ -14,6 +14,7 @@ const Welcome = () => {
     githubUsername: '',
     bio: ''
   });
+  const [canStep, setCanStep] = useState(false);
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -22,6 +23,10 @@ const Welcome = () => {
       ...profile,
       [name]: value
     });
+
+    if (profile.firstName && profile.lastName) {
+      setCanStep(true);
+    }
   };
 
   const onComplete = () => {
@@ -35,7 +40,7 @@ const Welcome = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
+      <Stepper header={<WelcomeHeader />} onComplete={onComplete} stepCondition={canStep}>
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
       </Stepper>
