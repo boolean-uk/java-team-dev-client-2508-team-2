@@ -7,6 +7,7 @@ import './style.css';
 
 const Welcome = () => {
   const { onCreateProfile } = useAuth();
+  const navigate = Navigator();
 
   const [profile, setProfile] = useState({
     firstName: '',
@@ -31,6 +32,7 @@ const Welcome = () => {
 
   const onComplete = () => {
     onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+    navigate('/');
   };
 
   return (
