@@ -46,7 +46,7 @@ const Register = () => {
 
   function onSubmit() {
     if (!passwordError) {
-      onRegister(formData.email, formData.password).catch((e) => {
+      onRegister(formData.email.toLowerCase(), formData.password).catch((e) => {
         console.error(e.message);
         setEmailError(e.message);
         setFormData({ email: '', password: '' });
