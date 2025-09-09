@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 const TextInput = ({ value, onChange, name, label, icon, type = 'text', errorMessage = '' }) => {
-  const [input, setInput] = useState('');
   const [showpassword, setShowpassword] = useState(false);
   if (type === 'password') {
     return (
@@ -13,10 +12,19 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text', errorMes
           value={value}
           onChange={(e) => {
             onChange(e);
-            setInput(e.target.value);
           }}
         />
-        {showpassword && <input type="text" name={name} value={input} className="passwordreveal" />}
+        {showpassword && (
+          <input
+            className="passwordreveal"
+            type="text"
+            name={name}
+            value={value}
+            onChange={(e) => {
+              onChange(e);
+            }}
+          />
+        )}
         <button
           className={`showpasswordbutton formbutton ${showpassword === true && '__faded'}`}
           onClick={(e) => {
@@ -41,7 +49,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text', errorMes
           className={icon && 'input-has-icon'}
         />
         {icon && <span className="input-icon">{icon}</span>}
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       </div>
     );
   }
