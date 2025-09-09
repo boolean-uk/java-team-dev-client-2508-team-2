@@ -19,7 +19,7 @@ const Register = () => {
       (value.length < 8 || !hasUpperCase(value) || !hasSpecialChar(value) || !hasNumber(value))
     ) {
       setPasswordError(
-        'The password needs to be at leats eight characters, including at least one capital letter, one number and one special character'
+        'The password needs to be at leats eight characters, including at least one capital letter, one number and one special character (!@#$%^&*())'
       );
     } else if (name === 'password') {
       setPasswordError('');
@@ -31,7 +31,7 @@ const Register = () => {
   }
 
   function hasSpecialChar(str) {
-    const regex = /[!@#$%^&*()\-+={}[\]:;"'<>,.?\\/|\\]/;
+    const regex = /[!@#$%^&*()]/;
     if (regex.test(str)) {
       return true;
     }
