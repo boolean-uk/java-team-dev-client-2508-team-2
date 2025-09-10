@@ -47,15 +47,13 @@ const Register = () => {
   function onSubmit(e) {
     e.preventDefault();
 
-    if (!passwordError) {
+    if (formData.password === '') {
+      setPasswordError("Password can't be empty");
+      setTimeout(() => setPasswordError(''), 2000);
+    } else if (!passwordError) {
       onRegister(formData.email.toLowerCase(), formData.password).catch((err) => {
         console.error(err.message);
         setEmailError(err.message);
-
-        if (formData.password === '') {
-          setPasswordError("Password can't be empty");
-          setTimeout(() => setPasswordError(''), 2000);
-        }
 
         setTimeout(() => setEmailError(''), 2000);
       });
