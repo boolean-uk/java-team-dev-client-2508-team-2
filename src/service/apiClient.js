@@ -5,7 +5,7 @@ async function login(email, password) {
 }
 
 async function register(email, password) {
-  await post('users', { email, password }, false);
+  await post('signup', { email, password }, false);
   return await login(email, password);
 }
 
@@ -48,6 +48,14 @@ async function request(method, endpoint, data, auth = true) {
   }
 
   const response = await fetch(`${API_URL}/${endpoint}`, opts);
+
+  if (!response.ok) {
+    const text = await response.text();
+    const dataResponse = text ? JSON.parse(text) : {};
+    const errorMessage =
+      dataResponse?.data?.message || dataResponse?.message || response.statusText;
+    throw new Error(errorMessage);
+  }
 
   return response.json();
 }
