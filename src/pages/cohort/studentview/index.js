@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier */
+
 import React, { useEffect, useState } from 'react';
-import CohortMemberList from '../../components/cohortMemberList';
-import useAuth from '../../hooks/useAuth';
+import CohortMemberList from '../../../components/cohort/cohortmemberlist';
+import useAuth from '../../../hooks/useAuth';
 import './index.css';
 
 const CohortPage = () => {
