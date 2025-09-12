@@ -1,47 +1,48 @@
-/* eslint-disable prettier/prettier */
-
 import React, { useEffect, useState } from 'react';
 import CohortMemberList from '../../../components/cohort/cohortmemberlist';
 import useAuth from '../../../hooks/useAuth';
 import './index.css';
 
 const CohortPage = () => {
-    const { user } = useAuth();  // haal de ingelogde user op
+    const { token } = useAuth();
     const [students, setStudents] = useState([]);
     const [teachers, setTeachers] = useState([]);
-    const [cohortName, setCohortName] = useState("");
+    const [cohortName, setCohortName] = useState('');
     const [loading, setLoading] = useState(true);
 
-    const cohortId = user?.cohort?.id;
+    const cohortId = 1;
 
     useEffect(() => {
-        if (!cohortId) return;
+        if (!cohortId || !token) return;
 
         const fetchCohort = async () => {
             try {
-                const cohortRes = await fetch(`http://localhost:4000/cohorts/${cohortId}`);
-                const cohortData = await cohortRes.json();
-                if (cohortData.data) setCohortName(cohortData.data.cohort?.name || "Cohort");
-
-                const studentsRes = await fetch(`http://localhost:4000/cohorts/${cohortId}/students`);
+                // fetch students
+                const studentsRes = await fetch(`http://localhost:4000/cohorts/${cohortId}/students`, {
+                    headers: { 'Authorization': `Bearer ${token}` },
+                });
                 const studentsData = await studentsRes.json();
+                console.log('Fetched students data:', studentsData);
                 setStudents(studentsData.data?.profiles || []);
 
-                const teachersRes = await fetch(`http://localhost:4000/cohorts/teachers`);
+                // fetch teachers
+                const teachersRes = await fetch(`http://localhost:4000/cohorts/teachers`, {
+                    headers: { 'Authorization': `Bearer ${token}` },
+                });
                 const teachersData = await teachersRes.json();
-                setTeachers(
-                    teachersData.data?.profiles?.filter(t => t.user?.cohort?.id === cohortId) || []
-                );
+                console.log('Fetched teachers data:', teachersData);
+                setTeachers(teachersData.data?.profiles || []);
 
+                setCohortName(`Cohort ${cohortId}`);
             } catch (err) {
-                console.error(err);
+                console.error('Error fetching cohort:', err);
             } finally {
                 setLoading(false);
             }
         };
 
         fetchCohort();
-    }, [cohortId]);
+    }, [cohortId, token]);
 
     if (loading) return <p>Loading...</p>;
 
@@ -50,7 +51,6 @@ const CohortPage = () => {
             <h2>{cohortName}</h2>
             <CohortMemberList members={students} title="Students" />
             <CohortMemberList members={teachers} title="Teachers" />
-            {/* TODO: Add statistics section here */}
         </div>
     );
 };

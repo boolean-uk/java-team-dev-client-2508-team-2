@@ -38,7 +38,7 @@ const App = () => {
               }
             />
             <Route
-              path="cohort"
+              path="cohort/:cohortId"
               element={
                 <ProtectedRoute>
                   <CohortPage />

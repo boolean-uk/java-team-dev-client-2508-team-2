@@ -7,7 +7,7 @@ const CohortMemberCard = ({ profile }) => {
 
     return (
         <div className="cohort-member-card">
-            <Link to={`/users/${profile.user.id}/profile`}>
+            <Link to={`/users/${profile.id}/profile`}>
                 <p>{profile.firstName} {profile.lastName}</p>
             </Link>
         </div>

@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
 
     if (storedToken) {
       setToken(storedToken);
-      // navigate(location.state?.from?.pathname || '/');
+      //navigate(location.state?.from?.pathname || '/');
     }
   }, [location.state?.from?.pathname, navigate]);
 
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
 
-    setToken(res.token);
+    setToken(res.data.token);
     navigate(location.state?.from?.pathname || '/');
   };
 
