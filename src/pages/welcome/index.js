@@ -4,17 +4,28 @@ import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import './style.css';
+import StepThree from './stepThree';
+import StepFour from './stepFour';
 
 const Welcome = () => {
-  const { onCreateProfile } = useAuth();
-  const navigate = Navigator();
+  const { onCreateProfile, user } = useAuth();
 
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
+    username: '',
+    email: user.email,
+    phone: '',
+    password: user.password,
     githubUsername: '',
-    bio: ''
+    bio: '',
+    role: 'Student',
+    specialism: 'Software Developer',
+    cohort: 'Cohort 4',
+    startDate: 'January 2023',
+    endDate: 'June 2023'
   });
+
   const [canStep, setCanStep] = useState(false);
 
   const onChange = (event) => {
@@ -32,7 +43,6 @@ const Welcome = () => {
 
   const onComplete = () => {
     onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
-    navigate('/');
   };
 
   return (
@@ -45,6 +55,8 @@ const Welcome = () => {
       <Stepper header={<WelcomeHeader />} onComplete={onComplete} stepCondition={canStep}>
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
+        <StepThree data={profile} setData={onChange} />
+        <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
   );
