@@ -4,7 +4,7 @@ import Button from '../button';
 import './style.css';
 import { useState } from 'react';
 
-const Stepper = ({ header, children, onComplete }) => {
+const Stepper = ({ header, children, onComplete, stepCondition = true }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const onBackClick = () => {
@@ -35,6 +35,7 @@ const Stepper = ({ header, children, onComplete }) => {
         <Button text="Back" classes="offwhite" onClick={onBackClick} />
         <Button
           text={currentStep === children.length - 1 ? 'Submit' : 'Next'}
+          disabled={!stepCondition}
           classes="blue"
           onClick={onNextClick}
         />
