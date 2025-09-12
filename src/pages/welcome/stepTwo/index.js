@@ -16,14 +16,7 @@ const StepTwo = ({ data, setData }) => {
             label={'Email*'}
             type="locked"
           />
-          <TextInput onChange={setData} value={data.mobile} name="mobile" label={'Mobile*'} />
-          <TextInput
-            onChange={setData}
-            value={data.password}
-            name="password"
-            label={'Password*'}
-            type="password"
-          />
+          <TextInput onChange={setData} value={data.mobile} name="mobile" label={'Mobile'} />
           <p className="text-blue1">*Required</p>
         </div>
       </Form>

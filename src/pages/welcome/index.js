@@ -16,7 +16,6 @@ const Welcome = () => {
     username: '',
     email: user.email,
     phone: '',
-    password: user.password,
     githubUsername: '',
     bio: '',
     role: 'Student',
