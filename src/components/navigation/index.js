@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import './style.css';
 
 const Navigation = () => {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
   if (!token) {
     return null;
@@ -28,7 +28,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/cohort/1">
+          <NavLink to={user?.cohort?.id ? `/cohort/${user.cohort.id}` : '#'}>
             <CohortIcon />
             <p>Cohort</p>
           </NavLink>

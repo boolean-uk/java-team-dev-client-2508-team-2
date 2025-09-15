@@ -4,13 +4,13 @@ import useAuth from '../../../hooks/useAuth';
 import './index.css';
 
 const CohortPage = () => {
-    const { token } = useAuth();
+    const { user, token } = useAuth();
     const [students, setStudents] = useState([]);
     const [teachers, setTeachers] = useState([]);
     const [cohortName, setCohortName] = useState('');
     const [loading, setLoading] = useState(true);
 
-    const cohortId = 1;
+    const cohortId = user?.cohort?.id;
 
     useEffect(() => {
         if (!cohortId || !token) return;

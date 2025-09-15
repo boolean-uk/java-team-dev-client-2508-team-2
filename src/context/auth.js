@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -35,12 +36,14 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('token', res.data.token);
 
     setToken(res.data.token);
+    setUser(res.data.user);
     navigate(location.state?.from?.pathname || '/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setToken(null);
+    setUser(null);
   };
 
   const handleRegister = async (email, password) => {
@@ -61,6 +64,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     token,
+    user,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
