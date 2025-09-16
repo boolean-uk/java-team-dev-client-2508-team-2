@@ -42,7 +42,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = 'text', errorMes
       <div className="inputwrapper">
         <label htmlFor={name}>{label}</label>
         <input type={'text'} name={name} value={value} disabled={true} />
-        <div className={`showpasswordbutton formbutton`}>
+        <div className={`lockicon`}>
           <LockIcon />
         </div>
         {errorMessage && <p className="errorMessage">{errorMessage}</p>}
