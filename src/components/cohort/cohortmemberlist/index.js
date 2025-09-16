@@ -8,9 +8,11 @@ const CohortMemberList = ({ members, title }) => {
     return (
         <div className="cohort-member-list">
             <h3>{title}</h3>
-            {members.map(member => (
-                <CohortMemberCard key={member.id} profile={member} />
-            ))}
+            <div className="member-grid">
+                {members.map((member, index) => (
+                    <CohortMemberCard key={member.id} profile={member} index={index} />
+                ))}
+            </div>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CohortMemberList from '../../../components/cohort/cohortmemberlist';
 import useAuth from '../../../hooks/useAuth';
+import Card from '../../../components/card';
 import './index.css';
 
 const CohortPage = () => {
@@ -47,11 +48,29 @@ const CohortPage = () => {
     if (loading) return <p>Loading...</p>;
 
     return (
-        <div className="cohort-page">
-            <h2>{cohortName}</h2>
-            <CohortMemberList members={students} title="Students" />
-            <CohortMemberList members={teachers} title="Teachers" />
-        </div>
+        <>
+            <main>
+                <Card>
+                    <h2>My Cohort</h2>
+
+                    {/* Cohort info blok */}
+                    <div className="cohort-page">
+                        <div className="cohort-avatar">C{cohortId}</div>
+                        <div className="cohort-details">
+                            <p className="cohort-name">{cohortName}</p>
+                        </div>
+                    </div>
+
+                    <CohortMemberList members={students} title="Students" />
+                </Card>
+            </main>
+
+            <aside>
+                <Card>
+                    <CohortMemberList members={teachers} title="Teachers" />
+                </Card>
+            </aside>
+        </>
     );
 };
 

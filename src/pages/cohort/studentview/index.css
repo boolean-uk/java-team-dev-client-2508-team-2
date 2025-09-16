@@ -1,7 +1,26 @@
 .cohort-page {
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #f9f9f9;
 }
 
-.cohort-page h2 {
-    margin-bottom: 20px;
+.cohort-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #16cc50;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.cohort-name {
+    font-weight: 600;
+    margin: 0;
 }

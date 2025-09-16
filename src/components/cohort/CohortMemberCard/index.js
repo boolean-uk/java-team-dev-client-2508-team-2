@@ -2,13 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-const CohortMemberCard = ({ profile }) => {
+const CohortMemberCard = ({ profile, index }) => {
     if (!profile) return null;
+
+    const initials = `${profile.firstName?.[0] || ''}${profile.lastName?.[0] || ''}`.toUpperCase();
 
     return (
         <div className="cohort-member-card">
-            <Link to={`/users/${profile.id}/profile`}>
-                <p>{profile.firstName} {profile.lastName}</p>
+            <div className={`member-avatar avatar-${index % 5}`}>{initials}</div>
+            <Link to={`/users/${profile.id}/profile`} className="member-name">
+                {profile.firstName} {profile.lastName}
             </Link>
         </div>
     );
