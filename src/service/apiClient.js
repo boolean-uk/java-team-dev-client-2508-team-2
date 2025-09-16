@@ -9,11 +9,10 @@ async function register(email, password) {
   return await login(email, password);
 }
 
-async function createProfile(userId, firstName, lastName, username, phone, githubUrl, bio) {
+async function createProfile(userId, firstName, lastName, phone, githubUrl, bio) {
   return await patch(`users/${userId}/profile`, {
     firstName,
     lastName,
-    username,
     phone,
     githubUrl,
     bio

@@ -13,7 +13,6 @@ const Welcome = () => {
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
-    username: '',
     email: user.email,
     phone: '',
     githubUsername: '',
@@ -41,7 +40,13 @@ const Welcome = () => {
   };
 
   const onComplete = () => {
-    onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+    onCreateProfile(
+      profile.firstName,
+      profile.lastName,
+      profile.phone,
+      profile.githubUsername,
+      profile.bio
+    );
   };
 
   return (
