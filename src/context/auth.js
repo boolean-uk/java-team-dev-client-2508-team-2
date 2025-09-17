@@ -6,15 +6,13 @@ import Navigation from '../components/navigation';
 import useAuth from '../hooks/useAuth';
 import { createProfile, login, register } from '../service/apiClient';
 
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
-
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -33,8 +31,8 @@ const AuthProvider = ({ children }) => {
     }
 
     localStorage.setItem('token', res.data.token);
-
-    setToken(res.token);
+    setToken(res.data.token);
+    setUser(res.data.user);
     navigate(location.state?.from?.pathname || '/');
   };
 
@@ -46,21 +44,19 @@ const AuthProvider = ({ children }) => {
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
     setToken(res.data.token);
-
+    setUser(res.data.user);
     navigate('/verification');
   };
 
-  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
-    const { userId } = jwt_decode(token);
-
-    await createProfile(userId, firstName, lastName, githubUrl, bio);
-
+  const handleCreateProfile = async (firstName, lastName, phone, githubUrl, bio) => {
     localStorage.setItem('token', token);
+    await createProfile(user.id, firstName, lastName, phone, githubUrl, bio);
     navigate('/');
   };
 
   const value = {
     token,
+    user,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
