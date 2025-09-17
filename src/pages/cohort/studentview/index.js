@@ -24,7 +24,6 @@ const CohortPage = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
         const studentsData = await studentsRes.json();
-        console.log('Fetched students data:', studentsData);
         setStudents(studentsData.data?.profiles || []);
 
         // fetch teachers
@@ -32,7 +31,6 @@ const CohortPage = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
         const teachersData = await teachersRes.json();
-        console.log('Fetched teachers data:', teachersData);
         setTeachers(teachersData.data?.profiles || []);
 
         setCohortName(`Cohort ${cohortId}`);
