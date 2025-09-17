@@ -16,9 +16,11 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    const storedUser = JSON.parse(localStorage.getItem('user'));
 
-    if (storedToken) {
+    if (storedToken && storedUser && !token) {
       setToken(storedToken);
+      setUser(storedUser);
       navigate(location.state?.from?.pathname || '/');
     }
   }, [location.state?.from?.pathname, navigate]);
@@ -31,6 +33,8 @@ const AuthProvider = ({ children }) => {
     }
 
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('user', JSON.stringify(res.data.user));
+
     setToken(res.data.token);
     setUser(res.data.user);
     navigate(location.state?.from?.pathname || '/');
@@ -38,13 +42,16 @@ const AuthProvider = ({ children }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setToken(null);
+    setUser(null);
   };
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
     setToken(res.data.token);
     setUser(res.data.user);
+
     navigate('/verification');
   };
 

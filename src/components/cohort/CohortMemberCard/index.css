@@ -1,0 +1,68 @@
+.cohort-member-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: background 0.2s;
+}
+
+.cohort-member-card:hover {
+    background: #f1f1f1;
+}
+
+.member-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.member-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.member-name:hover {
+    text-decoration: underline;
+}
+
+.member-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-track {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+}
+
+.avatar-0 {
+    background: #6096cf;
+}
+
+.avatar-1 {
+    background: #8b3030;
+}
+
+.avatar-2 {
+    background: #5c9d69;
+}
+
+.avatar-3 {
+    background: #bea96b;
+}
+
+.avatar-4 {
+    background: #4a4a4a;
+}
