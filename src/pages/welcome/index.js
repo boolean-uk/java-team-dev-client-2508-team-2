@@ -4,16 +4,27 @@ import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import './style.css';
+import StepThree from './stepThree';
+import StepFour from './stepFour';
 
 const Welcome = () => {
-  const { onCreateProfile } = useAuth();
+  const { onCreateProfile, user } = useAuth();
 
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
+    email: user.email,
+    phone: '',
     githubUsername: '',
-    bio: ''
+    bio: '',
+    role: 'Student',
+    specialism: 'Software Developer',
+    cohort: 'Cohort 4',
+    startDate: 'January 2023',
+    endDate: 'June 2023'
   });
+
+  const [canStep, setCanStep] = useState(false);
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -22,10 +33,20 @@ const Welcome = () => {
       ...profile,
       [name]: value
     });
+
+    if (profile.firstName && profile.lastName) {
+      setCanStep(true);
+    }
   };
 
   const onComplete = () => {
-    onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+    onCreateProfile(
+      profile.firstName,
+      profile.lastName,
+      profile.phone,
+      profile.githubUsername,
+      profile.bio
+    );
   };
 
   return (
@@ -35,9 +56,11 @@ const Welcome = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
+      <Stepper header={<WelcomeHeader />} onComplete={onComplete} stepCondition={canStep}>
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
+        <StepThree data={profile} setData={onChange} />
+        <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
   );
