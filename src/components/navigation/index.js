@@ -28,7 +28,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={user?.cohort?.id ? `/cohort/${user.cohort.id}` : '#'}>
+          <NavLink to={user?.cohort?.id ? `/cohort/${user.cohort.id}` : 'cohort/1'}>
             <CohortIcon />
             <p>Cohort</p>
           </NavLink>

@@ -5,7 +5,7 @@ import Card from '../../../components/card';
 import ExercisesCard from '../../../components/exercises';
 import './index.css';
 
-const CohortPage = () => {
+const CohortPageStudent = () => {
   const { user, token } = useAuth();
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
@@ -68,7 +68,11 @@ const CohortPage = () => {
 
       <aside>
         <Card>
-          <CohortMemberList members={teachers} title="Teachers" tracks={{ 1: 'Software Development', 2: 'Data Analytics', }} />
+          <CohortMemberList
+            members={teachers}
+            title="Teachers"
+            tracks={{ 1: 'Software Development', 2: 'Data Analytics' }}
+          />
         </Card>
         <ExercisesCard />
       </aside>
@@ -76,4 +80,4 @@ const CohortPage = () => {
   );
 };
 
-export default CohortPage;
+export default CohortPageStudent;
