@@ -23,4 +23,37 @@
 .cohort-name {
     font-weight: 600;
     margin: 0;
+    font-size: 1rem;
+    color: #0d0d0d;
+}
+
+.cohort-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.cohort-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.cohort-track {
+    font-weight: 600;
+    margin: 0;
+    font-size: 1rem;
+    color: #0d0d0d;
+}
+
+.cohort-dates {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.25rem;
+}
+
+.member-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    font-weight: 400;
 }

@@ -36,6 +36,17 @@
     text-decoration: underline;
 }
 
+.member-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-track {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+}
+
 .avatar-0 {
     background: #6096cf;
 }

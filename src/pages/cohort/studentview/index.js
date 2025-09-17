@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CohortMemberList from '../../../components/cohort/cohortmemberlist';
 import useAuth from '../../../hooks/useAuth';
 import Card from '../../../components/card';
+import ExercisesCard from '../../../components/exercises';
 import './index.css';
 
 const CohortPage = () => {
@@ -52,12 +53,14 @@ const CohortPage = () => {
       <main>
         <Card>
           <h2>My Cohort</h2>
-
-          {/* Cohort info blok */}
           <div className="cohort-page">
             <div className="cohort-avatar">C{cohortId}</div>
             <div className="cohort-details">
-              <p className="cohort-name">{cohortName}</p>
+              <div className="cohort-header">
+                <p className="cohort-track">Software Development,</p>
+                <span className="cohort-name">{cohortName}</span>
+              </div>
+              <p className="cohort-dates">January 2023 – June 2023</p>
             </div>
           </div>
 
@@ -67,8 +70,9 @@ const CohortPage = () => {
 
       <aside>
         <Card>
-          <CohortMemberList members={teachers} title="Teachers" />
+          <CohortMemberList members={teachers} title="Teachers" tracks={{ 1: 'Software Development', 2: 'Data Analytics', }} />
         </Card>
+        <ExercisesCard />
       </aside>
     </>
   );
