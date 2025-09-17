@@ -22,9 +22,14 @@ const StepOne = ({ data, setData }) => {
             onChange={setData}
             value={data.firstName}
             name="firstName"
-            label={'First name'}
+            label={'First name*'}
           />
-          <TextInput onChange={setData} value={data.lastName} name="lastName" label={'Last name'} />
+          <TextInput
+            onChange={setData}
+            value={data.lastName}
+            name="lastName"
+            label={'Last name*'}
+          />
           <TextInput
             onChange={setData}
             value={data.githubUsername}

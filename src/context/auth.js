@@ -6,9 +6,6 @@ import Navigation from '../components/navigation';
 import useAuth from '../hooks/useAuth';
 import { createProfile, login, register } from '../service/apiClient';
 
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
-
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -58,12 +55,9 @@ const AuthProvider = ({ children }) => {
     navigate('/verification');
   };
 
-  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
-    const { userId } = jwt_decode(token);
-
-    await createProfile(userId, firstName, lastName, githubUrl, bio);
-
+  const handleCreateProfile = async (firstName, lastName, phone, githubUrl, bio) => {
     localStorage.setItem('token', token);
+    await createProfile(user.id, firstName, lastName, phone, githubUrl, bio);
     navigate('/');
   };
 
