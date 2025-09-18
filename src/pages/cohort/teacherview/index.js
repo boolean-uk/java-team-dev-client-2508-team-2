@@ -51,7 +51,7 @@ const CohortPageTeacher = () => {
                   <SquareBracketsIcon background="rgba(249, 251, 252, 1)" />
                 </div>
                 <div className="cohort-details">
-                  <p className="cohort-name">Software testing</p>
+                  <p className="cohort-name">{cohort.specialisation.name}</p>
                   <small>cohort {cohort.id}</small>
                 </div>
               </div>

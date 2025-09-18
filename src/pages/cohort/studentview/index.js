@@ -33,7 +33,13 @@ const CohortPageStudent = () => {
         const teachersData = await teachersRes.json();
         setTeachers(teachersData.data?.profiles || []);
 
-        setCohortName(`Cohort ${cohortId}`);
+        // fetch cohort specialisation name
+        const cohortRes = await fetch(`http://localhost:4000/cohorts/${cohortId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const cohortData = await cohortRes.json();
+
+        setCohortName(cohortData.data?.cohort?.specialisation?.name || '');
       } catch (err) {
         console.error('Error fetching cohort:', err);
       } finally {
@@ -43,6 +49,8 @@ const CohortPageStudent = () => {
 
     fetchCohort();
   }, [cohortId, token]);
+
+  if (!cohortId) return <p>You are not assigned to any cohort.</p>;
 
   if (loading) return <p>Loading...</p>;
 
@@ -55,8 +63,8 @@ const CohortPageStudent = () => {
             <div className="cohort-avatar">C{cohortId}</div>
             <div className="cohort-details">
               <div className="cohort-header">
-                <p className="cohort-track">Software Development,</p>
-                <span className="cohort-name">{cohortName}</span>
+                <p className="cohort-track">{cohortName}, </p>
+                <span className="cohort-name">Cohort {cohortId}</span>
               </div>
               <p className="cohort-dates">January 2023 – June 2023</p>
             </div>
