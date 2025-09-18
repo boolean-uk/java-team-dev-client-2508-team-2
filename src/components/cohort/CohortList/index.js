@@ -8,7 +8,11 @@ const CohortList = ({ cohorts }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Button text="add cohort" onClick={() => alert('Create Cohort clicked!')} />
+      <Button
+        classes="offwhite cohort"
+        text="add cohort"
+        onClick={() => alert('Create Cohort clicked!')}
+      />
 
       <div className="cohort-list">
         {cohorts.map((cohort) => (

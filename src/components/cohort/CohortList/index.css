@@ -3,7 +3,7 @@
   overflow-y: auto;      /* scroll when too many */
   margin-top: 1rem;      /* space below button */
   padding-right: 0.5rem; /* space so scrollbar doesn't overlap content */
-  border-top: 1px solid var(--color-blue5);;
+  border-top: 1px solid var(--color-blue5);
 }
 
 .cohort-page.active {
@@ -55,18 +55,6 @@
     font-weight: bold;
 }
 
-button {
-  background-color: #f5f7fa; 
-  color: #5f6b7a;            
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-button:hover {
-  background-color: #e9eef5; 
+button.cohort {
+  margin-top: .8rem;
 }
