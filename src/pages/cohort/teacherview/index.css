@@ -1,3 +1,10 @@
 h2 {
   border-bottom: 1px solid var(--color-blue5);
 }
+
+.cohortspage-row {
+  display: flex;
+  flex-direction: row;
+   align-items: center; /* optional: vertically center */
+  gap: 1rem;
+}

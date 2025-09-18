@@ -7,7 +7,7 @@ const CohortList = ({ cohorts }) => {
   const { cohortId } = useParams();
   const navigate = useNavigate();
   return (
-    <>
+    <div className="cohort-list-container">
       <Button
         classes="offwhite cohort"
         text="add cohort"
@@ -29,7 +29,7 @@ const CohortList = ({ cohorts }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

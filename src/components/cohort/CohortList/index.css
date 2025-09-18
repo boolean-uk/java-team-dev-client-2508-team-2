@@ -6,6 +6,10 @@
   border-top: 1px solid var(--color-blue5);
 }
 
+.cohort-list-container {
+  border-right: 1px solid var(--color-blue5);
+}
+
 .cohort-page.active {
   background-color: #eef3ff;  /* soft blue highlight */
 }

@@ -3,11 +3,17 @@ import useAuth from '../../../hooks/useAuth';
 import Card from '../../../components/card';
 import './index.css';
 import CohortList from '../../../components/cohort/CohortList';
+// import TickIcon from '../../../assets/tickIcon';
+import CohortMemberList from '../../../components/cohort/cohortmemberlist';
+import { useParams } from 'react-router-dom';
 
 const CohortPageTeacher = () => {
+  const { cohortId } = useParams();
+
   const { token } = useAuth();
   const [cohorts, setCohorts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
     const fetchCohorts = async () => {
@@ -17,6 +23,13 @@ const CohortPageTeacher = () => {
         });
         const cohortsJson = await cohortRes.json();
         setCohorts(cohortsJson.data.cohorts || []);
+
+        // fetch students
+        const studentsRes = await fetch(`http://localhost:4000/cohorts/${cohortId}/students`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const studentsData = await studentsRes.json();
+        setStudents(studentsData.data?.profiles || []);
       } catch (err) {
         console.error('Error fetching cohort:', err);
       } finally {
@@ -34,7 +47,10 @@ const CohortPageTeacher = () => {
       <main>
         <Card>
           <h2>Cohorts</h2>
-          <CohortList cohorts={cohorts} />
+          <div className="cohortspage-row">
+            <CohortList cohorts={cohorts} />
+            <CohortMemberList members={students} title="Students" />
+          </div>
         </Card>
       </main>
     </>
