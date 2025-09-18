@@ -10,7 +10,12 @@ const CohortMemberList = ({ members, title, tracks }) => {
       <h3>{title}</h3>
       <div className="member-grid">
         {members.map((member, index) => (
-          <CohortMemberCard key={member.id} profile={member} index={index} subtitle={tracks ? tracks[member.id] : null} />
+          <CohortMemberCard
+            key={member.id}
+            profile={member}
+            index={index}
+            subtitle={tracks ? tracks[member.id] : null}
+          />
         ))}
       </div>
     </div>
