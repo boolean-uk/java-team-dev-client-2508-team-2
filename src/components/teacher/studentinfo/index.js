@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import './index.css';
 import TickIcon from '../../../assets/tickIcon';
 import NotTickIcon from '../../../assets/notTickIcon';
+import NotesPanel from '../notes';
 
 const StudentInfo = () => {
     const { token } = useAuth();
@@ -17,8 +18,6 @@ const StudentInfo = () => {
     const [selectedStudent, setSelectedStudent] = useState('');
     const [openUnits, setOpenUnits] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const [searchTerm, setSearchTerm] = useState(''); // 👉 search bar state
 
     const cohortExercises = {
         course: 'Software Development',
@@ -57,7 +56,8 @@ const StudentInfo = () => {
                 setCohorts(cohortList);
 
                 if (cohortList.length > 0) {
-                    const first = cohortList.find((c) => c.id === Number(cohortId)) || cohortList[0];
+                    const first =
+                        cohortList.find((c) => c.id === Number(cohortId)) || cohortList[0];
                     setSelectedCohort(first.id);
                     setSelectedCourse(first.specialisation?.id || '');
                 }
@@ -78,10 +78,19 @@ const StudentInfo = () => {
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
                 const data = await res.json();
-                const profiles = data.data?.profiles || [];
+                const profiles = (data.data?.profiles || []).map((s) => ({
+                    ...s,
+                    cohortId: selectedCohort,
+                    course:
+                        cohorts.find((c) => c.id === selectedCohort)?.specialisation?.name ||
+                        '',
+                }));
                 setStudents(profiles);
+
                 if (profiles.length > 0) {
                     setSelectedStudent(profiles[0].id);
+                } else {
+                    setSelectedStudent('');
                 }
             } catch (err) {
                 console.error('Error fetching students:', err);
@@ -91,27 +100,17 @@ const StudentInfo = () => {
         };
 
         fetchStudents();
-    }, [selectedCohort, token]);
+    }, [selectedCohort, cohorts, token]);
 
     if (loading) return <p>Loading student info...</p>;
 
-    // 👉 Studenten filteren op zoekterm
-    const filteredStudents = students.filter((student) =>
-        `${student.firstName} ${student.lastName}`
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase())
-    );
+    const selectedStudentData = students.find((s) => s.id === selectedStudent);
 
     return (
         <Card>
             <div className="student-info-header">
                 <h3>Student info</h3>
-                <input
-                    type="text"
-                    placeholder="Search for people"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
+                <input type="text" placeholder="Search for people" />
             </div>
 
             <div className="student-info-filters">
@@ -119,7 +118,10 @@ const StudentInfo = () => {
                     <label>Course</label>
                     <select value={selectedCourse} disabled>
                         {cohorts.map((cohort) => (
-                            <option key={cohort.specialisation.id} value={cohort.specialisation.id}>
+                            <option
+                                key={cohort.specialisation.id}
+                                value={cohort.specialisation.id}
+                            >
                                 {cohort.specialisation.name}
                             </option>
                         ))}
@@ -131,9 +133,9 @@ const StudentInfo = () => {
                     <select
                         value={selectedCohort}
                         onChange={(e) => {
-                            const newCohortId = Number(e.target.value);
-                            setSelectedCohort(newCohortId);
-                            const found = cohorts.find((c) => c.id === newCohortId);
+                            const cohortId = Number(e.target.value);
+                            setSelectedCohort(cohortId);
+                            const found = cohorts.find((c) => c.id === cohortId);
                             if (found) {
                                 setSelectedCourse(found.specialisation.id);
                             }
@@ -151,9 +153,9 @@ const StudentInfo = () => {
                     <label>Student</label>
                     <select
                         value={selectedStudent}
-                        onChange={(e) => setSelectedStudent(e.target.value)}
+                        onChange={(e) => setSelectedStudent(Number(e.target.value))}
                     >
-                        {filteredStudents.map((student) => (
+                        {students.map((student) => (
                             <option key={student.id} value={student.id}>
                                 {student.firstName} {student.lastName}
                             </option>
@@ -162,72 +164,77 @@ const StudentInfo = () => {
                 </div>
             </div>
 
-            {/* Exercises */}
-            <div className="cohort-exercises">
-                <h4>Cohort Exercises</h4>
-                <div className="course-section">
-                    <label>Course</label>
-                    <p>
-                        {
-                            cohorts.find((c) => c.specialisation.id === selectedCourse)
-                                ?.specialisation?.name || cohortExercises.course
-                        }
-                    </p>
+            <div className="student-info-content">
+                <div className="cohort-exercises">
+                    <h4>Cohort Exercises</h4>
+                    <div className="course-section">
+                        <label>Course</label>
+                        <p>
+                            {
+                                cohorts.find((c) => c.specialisation.id === selectedCourse)
+                                    ?.specialisation?.name || cohortExercises.course
+                            }
+                        </p>
+                    </div>
+
+                    {cohortExercises.modules.map((module) => (
+                        <div key={module.name} className="module-block">
+                            <div className="module-section">
+                                <label>Module</label>
+                                <p>{module.name}</p>
+                            </div>
+
+                            <div className="units-grid">
+                                {module.units.map((unit) => (
+                                    <div key={unit.name} className="unit-section">
+                                        <div
+                                            className="unit-header"
+                                            onClick={() =>
+                                                setOpenUnits((prev) =>
+                                                    prev.includes(unit.name)
+                                                        ? prev.filter((u) => u !== unit.name)
+                                                        : [...prev, unit.name]
+                                                )
+                                            }
+                                        >
+                                            <span className="unit-label">Unit</span>
+                                            <div className="unit-title">
+                                                <p>{unit.name}</p>
+                                                <span className="unit-arrow">
+                                                    {openUnits.includes(unit.name) ? '▲' : '▼'}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {openUnits.includes(unit.name) && (
+                                            <ul className="exercise-list">
+                                                {unit.exercises.map((exercise) => (
+                                                    <li
+                                                        key={exercise.id}
+                                                        className={
+                                                            exercise.completed ? 'completed' : 'not-completed'
+                                                        }
+                                                    >
+                                                        <span className="exercise-status">
+                                                            {exercise.completed ? (
+                                                                <TickIcon height={16} width={16} />
+                                                            ) : (
+                                                                <NotTickIcon height={16} width={16} />
+                                                            )}
+                                                        </span>
+                                                        {exercise.name}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
-                {cohortExercises.modules.map((module) => (
-                    <div key={module.name} className="module-block">
-                        <div className="module-section">
-                            <label>Module</label>
-                            <p>{module.name}</p>
-                        </div>
-
-                        <div className="units-grid">
-                            {module.units.map((unit) => (
-                                <div key={unit.name} className="unit-section">
-                                    <div
-                                        className="unit-header"
-                                        onClick={() =>
-                                            setOpenUnits((prev) =>
-                                                prev.includes(unit.name)
-                                                    ? prev.filter((u) => u !== unit.name)
-                                                    : [...prev, unit.name]
-                                            )
-                                        }
-                                    >
-                                        <span className="unit-label">Unit</span>
-                                        <div className="unit-title">
-                                            <p>{unit.name}</p>
-                                            <span className="unit-arrow">
-                                                {openUnits.includes(unit.name) ? '▲' : '▼'}
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    {openUnits.includes(unit.name) && (
-                                        <ul className="exercise-list">
-                                            {unit.exercises.map((exercise) => (
-                                                <li
-                                                    key={exercise.id}
-                                                    className={exercise.completed ? 'completed' : 'not-completed'}
-                                                >
-                                                    <span className="exercise-status">
-                                                        {exercise.completed ? (
-                                                            <TickIcon height={16} width={16} />
-                                                        ) : (
-                                                            <NotTickIcon height={16} width={16} />
-                                                        )}
-                                                    </span>
-                                                    {exercise.name}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
+                <NotesPanel student={selectedStudentData} />
             </div>
         </Card>
     );

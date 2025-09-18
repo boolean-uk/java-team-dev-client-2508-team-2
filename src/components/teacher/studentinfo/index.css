@@ -178,3 +178,10 @@
     border: 2px solid #ccc;
     display: inline-block;
 }
+
+.student-info-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}

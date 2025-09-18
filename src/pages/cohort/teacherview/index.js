@@ -31,15 +31,16 @@ const CohortPageTeacher = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <>
-      <main>
-        <Card>
-          <h2>Cohorts</h2>
-          <CohortList cohorts={cohorts} />
-        </Card>
+    <main>
+      <Card>
+        <h2>Cohorts</h2>
+        <CohortList cohorts={cohorts} />
+      </Card>
+
+      <div className="teacher-content">
         <StudentInfo />
-      </main>
-    </>
+      </div>
+    </main>
   );
 };
 
