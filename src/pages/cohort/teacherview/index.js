@@ -3,6 +3,7 @@ import useAuth from '../../../hooks/useAuth';
 import Card from '../../../components/card';
 import './index.css';
 import CohortList from '../../../components/cohort/CohortList';
+import StudentInfo from '../../../components/teacher/studentinfo';
 
 const CohortPageTeacher = () => {
   const { token } = useAuth();
@@ -36,6 +37,7 @@ const CohortPageTeacher = () => {
           <h2>Cohorts</h2>
           <CohortList cohorts={cohorts} />
         </Card>
+        <StudentInfo />
       </main>
     </>
   );
