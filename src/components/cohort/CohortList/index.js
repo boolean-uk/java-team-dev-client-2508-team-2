@@ -9,7 +9,7 @@ const CohortList = ({ cohorts }) => {
   return (
     <>
       <Button
-        classes="offwhite"
+        classes="offwhite cohort"
         text="add cohort"
         onClick={() => alert('Create Cohort clicked!')}
       />

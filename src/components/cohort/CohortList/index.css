@@ -3,7 +3,7 @@
   overflow-y: auto;      /* scroll when too many */
   margin-top: 1rem;      /* space below button */
   padding-right: 0.5rem; /* space so scrollbar doesn't overlap content */
-  border-top: 1px solid var(--color-blue5);;
+  border-top: 1px solid var(--color-blue5);
 }
 
 .cohort-page.active {
@@ -53,4 +53,8 @@
     align-items: center;
     justify-content: center;
     font-weight: bold;
+}
+
+button.cohort {
+  margin-top: .8rem;
 }
