@@ -1,0 +1,72 @@
+.cohort-list {
+  max-height: 900px;     /* adjust to fit your design */
+  overflow-y: auto;      /* scroll when too many */
+  margin-top: 1rem;      /* space below button */
+  padding-right: 0.5rem; /* space so scrollbar doesn't overlap content */
+  border-top: 1px solid var(--color-blue5);;
+}
+
+.cohort-page.active {
+  background-color: #eef3ff;  /* soft blue highlight */
+}
+
+
+.cohort-name {
+  font-weight: 700;
+  color: #0b0c5c;  /* dark navy */
+  margin: 0;
+}
+
+.cohort-details small {
+  color: #6b7280; /* muted gray */
+}
+
+.cohort-avatar svg {
+  width: 70%;  
+  height: 70%;
+  display: block;
+  margin: auto;
+}
+
+
+.cohort-avatar.software {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #16cc50;
+}
+
+.cohort-avatar.front-end {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #743ce2;
+}
+
+.cohort-avatar.data {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #208fea;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+button {
+  background-color: #f5f7fa; 
+  color: #5f6b7a;            
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #e9eef5; 
+}

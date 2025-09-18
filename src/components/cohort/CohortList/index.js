@@ -1,6 +1,7 @@
+import CohortIcon from '../../../assets/icons/cohortIconSpecialisationIcon';
 import Button from '../../../components/button';
-import SquareBracketsIcon from '../../../assets/icons/squareBracketsIcon';
 import { useParams, useNavigate } from 'react-router-dom';
+import './index.css';
 
 const CohortList = ({ cohorts }) => {
   const { cohortId } = useParams();
@@ -16,9 +17,7 @@ const CohortList = ({ cohorts }) => {
             key={cohort.id}
             onClick={() => navigate(`/cohort/${cohort.id}`)}
           >
-            <div className="cohort-avatar">
-              <SquareBracketsIcon background="rgba(249, 251, 252, 1)" />
-            </div>
+            <CohortIcon specialisation={cohort.specialisation.id} />
             <div className="cohort-details">
               <p className="cohort-name">{cohort.specialisation.name}</p>
               <small>cohort {cohort.id}</small>
