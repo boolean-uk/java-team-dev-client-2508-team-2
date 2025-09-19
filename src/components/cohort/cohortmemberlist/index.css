@@ -1,7 +1,23 @@
+.cohort-page-container {
+    border-bottom: 1px solid var(--color-blue5);
+    margin-bottom: 1rem;
+}
+
+.cohort-page-memberlist {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    padding-bottom: 3px;
+}
+
+.cohort-details {
+    padding-left: 1rem;
+}
+
 .cohort-member-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    width: 100%;
 }
 
 .cohort-member-list h3 {
@@ -15,7 +31,8 @@
 }
 
 .cohort-member-list .member-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
+    display: grid;
+    overflow-y: auto;
 }

@@ -58,19 +58,17 @@ const CohortPageStudent = () => {
     <>
       <main>
         <Card>
-          <h2>My Cohort</h2>
-          <div className="cohort-page">
-            <div className="cohort-avatar">C{cohortId}</div>
-            <div className="cohort-details">
-              <div className="cohort-header">
-                <p className="cohort-track">{cohortName}, </p>
-                <span className="cohort-name">Cohort {cohortId}</span>
-              </div>
-              <p className="cohort-dates">January 2023 – June 2023</p>
-            </div>
+          <div className="myCohort">
+            <h2>My Cohort</h2>
           </div>
 
-          <CohortMemberList members={students} title="Students" />
+          <CohortMemberList
+            members={students}
+            title="Students"
+            cohortId={cohortId}
+            cohortName={cohortName}
+            specialisationId={user?.cohort?.specialisation?.id}
+          />
         </Card>
       </main>
 

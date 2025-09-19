@@ -15,6 +15,9 @@ const CohortPageTeacher = () => {
   const [loading, setLoading] = useState(true);
   const [students, setStudents] = useState([]);
 
+  // const cohortIndex = Number(cohortId) - 1;
+  const cohort = cohorts.find((c) => c.id === Number(cohortId));
+
   useEffect(() => {
     const fetchCohorts = async () => {
       try {
@@ -46,10 +49,17 @@ const CohortPageTeacher = () => {
     <>
       <main>
         <Card>
-          <h2>Cohorts</h2>
+          <h2 className="cohorts-title">Cohorts</h2>
           <div className="cohortspage-row">
             <CohortList cohorts={cohorts} />
-            <CohortMemberList members={students} title="Students" />
+
+            <CohortMemberList
+              members={students}
+              title="Students"
+              cohortId={Number(cohortId)}
+              cohortName={cohort?.specialisation?.name}
+              specialisationId={cohort?.specialisation?.id}
+            />
           </div>
         </Card>
       </main>
