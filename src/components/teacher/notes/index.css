@@ -110,6 +110,8 @@
 
 .notes-list {
     padding-left: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .notes-list .note-item {
@@ -128,4 +130,86 @@
 .note-date {
     font-size: 0.75rem;
     color: #777;
+}
+
+.note-add-form {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.note-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    resize: vertical;
+    background: #f9f9f9;
+}
+
+.note-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease;
+}
+
+.cancel-btn {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background: #e0e0e0;
+}
+
+.save-btn {
+    background: #000046;
+    color: white;
+    font-weight: 500;
+}
+
+.save-btn:hover {
+    background: #1a1a80;
+}
+
+.close-btn {
+    all: unset;
+    background: #f5f5f5;
+    font-size: 0.9rem;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+    background: #e0e0e0;
+}
+
+.student-info.with-underline {
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
 }
