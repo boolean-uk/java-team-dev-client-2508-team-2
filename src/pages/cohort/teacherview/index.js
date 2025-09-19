@@ -15,7 +15,6 @@ const CohortPageTeacher = () => {
   const [loading, setLoading] = useState(true);
   const [students, setStudents] = useState([]);
 
-  // const cohortIndex = Number(cohortId) - 1;
   const cohort = cohorts.find((c) => c.id === Number(cohortId));
 
   useEffect(() => {
@@ -56,8 +55,8 @@ const CohortPageTeacher = () => {
             <CohortMemberList
               members={students}
               title="Students"
-              cohortId={Number(cohortId)}
-              cohortName={cohort?.specialisation?.name}
+              cohortName={cohort?.name}
+              cohortSpeciality={cohort?.specialisation?.name}
               specialisationId={cohort?.specialisation?.id}
             />
           </div>

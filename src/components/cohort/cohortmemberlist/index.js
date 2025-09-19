@@ -3,7 +3,14 @@ import CohortMemberCard from '../CohortMemberCard';
 import './index.css';
 import CohortIcon from '../../../assets/icons/cohortIconSpecialisationIcon';
 
-const CohortMemberList = ({ members, title, tracks, cohortId, cohortName, specialisationId }) => {
+const CohortMemberList = ({
+  members,
+  title,
+  tracks,
+  cohortName,
+  cohortSpeciality,
+  specialisationId
+}) => {
   if (!members || members.length === 0) return <p>No {title.toLowerCase()} found</p>;
 
   return (
@@ -14,8 +21,8 @@ const CohortMemberList = ({ members, title, tracks, cohortId, cohortName, specia
             <CohortIcon specialisation={specialisationId} />
             <div className="cohort-details">
               <div className="cohort-header">
-                <p className="cohort-track">{cohortName}, </p>
-                <span className="cohort-name">Cohort {cohortId}</span>
+                <p className="cohort-track">{cohortSpeciality}, </p>
+                <span className="cohort-name">{cohortName}</span>
               </div>
               <p className="cohort-dates">January 2023 – June 2023</p>
             </div>

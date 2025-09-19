@@ -24,7 +24,7 @@ const CohortList = ({ cohorts }) => {
             <CohortIcon specialisation={cohort.specialisation.id} />
             <div className="cohort-details">
               <p className="cohort-name">{cohort.specialisation.name}</p>
-              <small>cohort {cohort.id}</small>
+              <small>{cohort.name}</small>
             </div>
           </div>
         ))}
