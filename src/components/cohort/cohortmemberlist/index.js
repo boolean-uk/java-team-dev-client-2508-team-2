@@ -3,34 +3,31 @@ import CohortMemberCard from '../CohortMemberCard';
 import './index.css';
 import CohortIcon from '../../../assets/icons/cohortIconSpecialisationIcon';
 
-const CohortMemberList = ({
-  members,
-  title,
-  tracks,
-  cohortName,
-  cohortSpeciality,
-  specialisationId
-}) => {
-  if (!members || members.length === 0) return <p>No {title.toLowerCase()} found</p>;
-
+const CohortMemberList = ({ members, title, tracks, cohort }) => {
   return (
     <div className="cohort-member-list">
       {title === 'Students' && (
         <div className="cohort-page-container">
           <div className="cohort-page-memberlist">
-            <CohortIcon specialisation={specialisationId} />
+            <CohortIcon specialisation={cohort.specialisation.id} />
             <div className="cohort-details">
               <div className="cohort-header">
-                <p className="cohort-track">{cohortSpeciality}, </p>
-                <span className="cohort-name">{cohortName}</span>
+                <p className="cohort-track">{cohort.specialisation.name}, </p>
+                <span className="cohort-name">{cohort?.name}</span>
               </div>
-              <p className="cohort-dates">January 2023 – June 2023</p>
+              <p className="cohort-dates">
+                {cohort.startDate && cohort.endDate
+                  ? `${cohort.startDate} – ${cohort.endDate}`
+                  : 'No dates set'}
+              </p>
             </div>
           </div>
         </div>
       )}
 
-      <div className="member-grid">
+      {(!members || members.length === 0) && <p>No {title.toLowerCase()} found</p>}
+
+      <div className={`member-grid ${title}`}>
         {members.map((member, index) => (
           <CohortMemberCard
             key={member.id}

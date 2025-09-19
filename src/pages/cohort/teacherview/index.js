@@ -40,7 +40,7 @@ const CohortPageTeacher = () => {
     };
 
     fetchCohorts();
-  }, [token]);
+  }, [token, cohortId]);
 
   if (loading) return <p>Loading...</p>;
 
@@ -52,13 +52,7 @@ const CohortPageTeacher = () => {
           <div className="cohortspage-row">
             <CohortList cohorts={cohorts} />
 
-            <CohortMemberList
-              members={students}
-              title="Students"
-              cohortName={cohort?.name}
-              cohortSpeciality={cohort?.specialisation?.name}
-              specialisationId={cohort?.specialisation?.id}
-            />
+            <CohortMemberList members={students} title="Students" cohort={cohort} />
           </div>
         </Card>
       </main>
