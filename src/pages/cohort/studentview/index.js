@@ -4,15 +4,17 @@ import useAuth from '../../../hooks/useAuth';
 import Card from '../../../components/card';
 import ExercisesCard from '../../../components/exercises';
 import './index.css';
+import { useParams } from 'react-router-dom';
 
 const CohortPageStudent = () => {
   const { user, token } = useAuth();
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
-  const [cohortName, setCohortName] = useState('');
+  const [cohort, setCohort] = useState('');
   const [loading, setLoading] = useState(true);
+  const { cohortId } = useParams();
 
-  const cohortId = user?.cohort?.id;
+  const cohortIdUser = user?.cohort?.id;
 
   useEffect(() => {
     if (!cohortId || !token) return;
@@ -39,7 +41,7 @@ const CohortPageStudent = () => {
         });
         const cohortData = await cohortRes.json();
 
-        setCohortName(cohortData.data?.cohort?.specialisation?.name || '');
+        setCohort(cohortData.data?.cohort || '');
       } catch (err) {
         console.error('Error fetching cohort:', err);
       } finally {
@@ -52,25 +54,19 @@ const CohortPageStudent = () => {
 
   if (!cohortId) return <p>You are not assigned to any cohort.</p>;
 
+  if (Number(cohortId) !== cohortIdUser) return <p>This is not your cohort</p>;
+
   if (loading) return <p>Loading...</p>;
 
   return (
     <>
       <main>
         <Card>
-          <h2>My Cohort</h2>
-          <div className="cohort-page">
-            <div className="cohort-avatar">C{cohortId}</div>
-            <div className="cohort-details">
-              <div className="cohort-header">
-                <p className="cohort-track">{cohortName}, </p>
-                <span className="cohort-name">Cohort {cohortId}</span>
-              </div>
-              <p className="cohort-dates">January 2023 – June 2023</p>
-            </div>
+          <div className="myCohort">
+            <h2>My Cohort</h2>
           </div>
 
-          <CohortMemberList members={students} title="Students" />
+          <CohortMemberList members={students} title="Students" cohort={cohort} />
         </Card>
       </main>
 
