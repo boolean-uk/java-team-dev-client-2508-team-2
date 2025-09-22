@@ -19,60 +19,7 @@ const StudentInfo = () => {
     const [openUnits, setOpenUnits] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const cohortExercises = {
-        course: 'Software Development',
-        modules: [
-            {
-                name: 'User Interface with HTML & CSS',
-                units: [
-                    {
-                        name: 'TDD',
-                        exercises: [
-                            { id: 1, name: "Bob's Bagels Legacy", completed: true },
-                            { id: 2, name: 'Cohort Manager Challenge', completed: true },
-                            { id: 3, name: 'Legacy Code: ToDo List', completed: false },
-                            { id: 6, name: "Bob's Bagels Legacy", completed: true },
-                            { id: 7, name: 'Cohort Manager Challenge', completed: true },
-                            { id: 8, name: 'Legacy Code: ToDo List', completed: false },
-                            { id: 9, name: "Bob's Bagels Legacy", completed: true },
-                            { id: 10, name: 'Cohort Manager Challenge', completed: true },
-                            { id: 11, name: 'Legacy Code: ToDo List', completed: false },
-                            { id: 12, name: "Bob's Bagels Legacy", completed: true },
-                            { id: 13, name: 'Cohort Manager Challenge', completed: true },
-                            { id: 14, name: 'Legacy Code: ToDo List', completed: false },
-                            { id: 15, name: "Bob's Bagels Legacy", completed: true },
-                            { id: 16, name: 'Cohort Manager Challenge', completed: true },
-                            { id: 17, name: 'Legacy Code: ToDo List', completed: false },
-                            { id: 18, name: "Bob's Bagels Legacy", completed: true },
-                            { id: 19, name: 'Cohort Manager Challenge', completed: true },
-                            { id: 20, name: 'Legacy Code: ToDo List', completed: false },
-                        ],
-                    },
-                    {
-                        name: 'Spotify',
-                        exercises: [
-                            { id: 4, name: 'Questionbox', completed: true },
-                            { id: 5, name: 'HTML Semantics', completed: false },
-                            { id: 21, name: 'Questionbox', completed: true },
-                            { id: 22, name: 'HTML Semantics', completed: false },
-                            { id: 23, name: 'Questionbox', completed: true },
-                            { id: 24, name: 'HTML Semantics', completed: false },
-                            { id: 25, name: 'Questionbox', completed: true },
-                            { id: 26, name: 'HTML Semantics', completed: false },
-                            { id: 27, name: 'Questionbox', completed: true },
-                            { id: 28, name: 'HTML Semantics', completed: false },
-                            { id: 29, name: 'Questionbox', completed: true },
-                            { id: 30, name: 'HTML Semantics', completed: false },
-                            { id: 31, name: 'Questionbox', completed: true },
-                            { id: 32, name: 'HTML Semantics', completed: false },
-                            { id: 33, name: 'Questionbox', completed: true },
-                            { id: 34, name: 'HTML Semantics', completed: false },
-                        ],
-                    },
-                ],
-            },
-        ],
-    };
+    const [exercisesData, setExercisesData] = useState([]);
 
     useEffect(() => {
         const fetchCohorts = async () => {
@@ -130,6 +77,25 @@ const StudentInfo = () => {
 
         fetchStudents();
     }, [selectedCohort, cohorts, token]);
+
+    useEffect(() => {
+        const fetchExercises = async () => {
+            if (!selectedStudent) return;
+            try {
+                const res = await fetch(
+                    `http://localhost:4000/users/${selectedStudent}/exercises`,
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+                const data = await res.json();
+                const userExercises = data.data?.userExercises || [];
+                setExercisesData(userExercises);
+            } catch (err) {
+                console.error('Error fetching exercises:', err);
+            }
+        };
+
+        fetchExercises();
+    }, [selectedStudent, token]);
 
     if (loading) return <p>Loading student info...</p>;
 
@@ -201,66 +167,67 @@ const StudentInfo = () => {
                         <p>
                             {
                                 cohorts.find((c) => c.specialisation.id === selectedCourse)
-                                    ?.specialisation?.name || cohortExercises.course
+                                    ?.specialisation?.name || 'Software Development'
                             }
                         </p>
                     </div>
 
-                    {cohortExercises.modules.map((module) => (
-                        <div key={module.name} className="module-block">
-                            <div className="module-section">
-                                <label>Module</label>
-                                <p>{module.name}</p>
-                            </div>
+                    <div className="module-block">
+                        <div className="module-section">
+                            <label>Module</label>
+                            <p>Exercises</p>
+                        </div>
 
-                            <div className="units-grid">
-                                {module.units.map((unit) => (
-                                    <div key={unit.name} className="unit-section">
+                        <div className="units-grid">
+                            {exercisesData.map((userExercise) => {
+                                const unitName = userExercise.exercise?.unit?.name || 'Unknown Unit';
+                                const exerciseName = userExercise.exercise?.name || 'Unknown Exercise';
+
+                                return (
+                                    <div key={`${unitName}-${userExercise.id}`} className="unit-section">
                                         <div
                                             className="unit-header"
                                             onClick={() =>
                                                 setOpenUnits((prev) =>
-                                                    prev.includes(unit.name)
-                                                        ? prev.filter((u) => u !== unit.name)
-                                                        : [...prev, unit.name]
+                                                    prev.includes(unitName)
+                                                        ? prev.filter((u) => u !== unitName)
+                                                        : [...prev, unitName]
                                                 )
                                             }
                                         >
                                             <span className="unit-label">Unit</span>
                                             <div className="unit-title">
-                                                <p>{unit.name}</p>
+                                                <p>{unitName}</p>
                                                 <span className="unit-arrow">
-                                                    {openUnits.includes(unit.name) ? '▲' : '▼'}
+                                                    {openUnits.includes(unitName) ? '▲' : '▼'}
                                                 </span>
                                             </div>
                                         </div>
 
-                                        {openUnits.includes(unit.name) && (
+                                        {openUnits.includes(unitName) && (
                                             <ul className="exercise-list">
-                                                {unit.exercises.map((exercise) => (
-                                                    <li
-                                                        key={exercise.id}
-                                                        className={
-                                                            exercise.completed ? 'completed' : 'not-completed'
-                                                        }
-                                                    >
-                                                        <span className="exercise-status">
-                                                            {exercise.completed ? (
-                                                                <TickIcon height={16} width={16} />
-                                                            ) : (
-                                                                <NotTickIcon height={16} width={16} />
-                                                            )}
-                                                        </span>
-                                                        {exercise.name}
-                                                    </li>
-                                                ))}
+                                                <li
+                                                    key={userExercise.id}
+                                                    className={
+                                                        userExercise.status ? 'completed' : 'not-completed'
+                                                    }
+                                                >
+                                                    <span className="exercise-status">
+                                                        {userExercise.status ? (
+                                                            <TickIcon height={16} width={16} />
+                                                        ) : (
+                                                            <NotTickIcon height={16} width={16} />
+                                                        )}
+                                                    </span>
+                                                    {exerciseName}
+                                                </li>
                                             </ul>
                                         )}
                                     </div>
-                                ))}
-                            </div>
+                                );
+                            })}
                         </div>
-                    ))}
+                    </div>
                 </div>
 
                 <NotesPanel student={selectedStudentData} />
