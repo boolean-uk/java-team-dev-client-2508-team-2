@@ -3,7 +3,7 @@ import useAuth from '../../../hooks/useAuth';
 import Card from '../../../components/card';
 import './index.css';
 import CohortList from '../../../components/cohort/CohortList';
-// import TickIcon from '../../../assets/tickIcon';
+import StudentInfo from '../../../components/teacher/studentinfo';
 import CohortMemberList from '../../../components/cohort/cohortmemberlist';
 import { useParams } from 'react-router-dom';
 
@@ -47,14 +47,20 @@ const CohortPageTeacher = () => {
   return (
     <>
       <main>
-        <Card>
-          <h2 className="cohorts-title">Cohorts</h2>
-          <div className="cohortspage-row">
-            <CohortList cohorts={cohorts} />
+        <div className="teacher-cohorts">
+          <Card>
+            <h2 className="cohorts-title">Cohorts</h2>
+            <div className="cohortspage-row">
+              <CohortList cohorts={cohorts} />
 
-            <CohortMemberList members={students} title="Students" cohort={cohort} />
-          </div>
-        </Card>
+              <CohortMemberList members={students} title="Students" cohort={cohort} />
+            </div>
+          </Card>
+        </div>
+
+        <div className="teacher-content">
+          <StudentInfo />
+        </div>
       </main>
     </>
   );

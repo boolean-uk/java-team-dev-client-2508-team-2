@@ -2,9 +2,36 @@
   border-bottom: 1px solid var(--color-blue5);
 }
 
+.teacher-content main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.teacher-content .card {
+  width: 150%;
+  max-width: none;
+}
+
+.teacher-content .student-info-content {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+  gap: 1.25rem;
+}
+
+.teacher-content .student-info-content>* {
+  min-width: 0;
+}
+
 .cohortspage-row {
   display: flex;
   flex-direction: row;
-  /* align-items: center; optional: vertically center */
   gap: 1rem;
+}
+
+.teacher-cohorts .card {
+  width: 150%;
+  max-width: none;
 }

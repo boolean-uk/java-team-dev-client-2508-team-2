@@ -1,0 +1,215 @@
+.notes-panel {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.notes-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: #ddd;
+}
+
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.add-btn {
+    all: unset;
+    background: #f5f5f5;
+    font-size: 0.9rem;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
+}
+
+.add-btn:hover {
+    background: #e0e0e0;
+}
+
+
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #16cc50;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.student-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+}
+
+.student-course {
+    font-size: 0.85rem;
+    color: #777;
+    margin: 0;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0.8rem 0 1.2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.6rem 2.5rem 0.6rem 0.8rem;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+
+.search-icon {
+    position: absolute;
+    right: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notes-list {
+    padding-left: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.notes-list .note-item {
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.note-text {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #111;
+    font-weight: 500;
+}
+
+.note-date {
+    font-size: 0.75rem;
+    color: #777;
+}
+
+.note-add-form {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.note-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    resize: vertical;
+    background: #f9f9f9;
+}
+
+.note-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease;
+}
+
+.cancel-btn {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background: #e0e0e0;
+}
+
+.save-btn {
+    background: #000046;
+    color: white;
+    font-weight: 500;
+}
+
+.save-btn:hover {
+    background: #1a1a80;
+}
+
+.close-btn {
+    all: unset;
+    background: #f5f5f5;
+    font-size: 0.9rem;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+    background: #e0e0e0;
+}
+
+.student-info.with-underline {
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+}

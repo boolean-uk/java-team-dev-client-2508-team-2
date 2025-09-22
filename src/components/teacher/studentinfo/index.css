@@ -1,0 +1,193 @@
+.student-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.student-info-filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    background-color: #f9f9f9;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #f9f9f9;
+    background-color: #f9f9f9;
+}
+
+.student-info-header input {
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.cohort-exercises h4 {
+    margin-bottom: 0.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.course-section {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.course-section label {
+    font-size: 0.8rem;
+    color: #777;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.course-section p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+}
+
+.module-section {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.module-section label {
+    font-size: 0.8rem;
+    color: #777;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.module-section p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+}
+
+.units-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.unit-section {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0.5rem;
+}
+
+.unit-header {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    transition: background 0.2s;
+}
+
+.unit-header:hover {
+    background: #f9f9f9;
+}
+
+.unit-arrow {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.unit-label {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 0.2rem;
+}
+
+.unit-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.unit-title p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+}
+
+.exercise-list {
+    list-style: none;
+    padding-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.exercise-list li {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0;
+    font-size: 0.9rem;
+}
+
+.exercise-list li.completed {
+    color: #16cc50;
+    font-weight: 500;
+}
+
+.exercise-list li.not-completed {
+    color: #777;
+}
+
+.exercise-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+}
+
+.circle-placeholder {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: inline-block;
+}
+
+.student-info-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cohort-exercises {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
