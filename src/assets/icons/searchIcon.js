@@ -1,4 +1,4 @@
-const SearchIcon = ({ width = 30, height = 30, color = "#000046" }) => {
+const SearchIcon = ({ width = 30, height = 30, color = '#000046' }) => {
   return (
     <svg
       width={width}

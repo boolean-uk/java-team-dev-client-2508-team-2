@@ -1,4 +1,4 @@
-h2 {
+.cohorts-title {
   border-bottom: 1px solid var(--color-blue5);
 }
 
@@ -24,4 +24,10 @@ main {
 
 .teacher-content .student-info-content>* {
   min-width: 0;
+}
+
+.cohortspage-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
