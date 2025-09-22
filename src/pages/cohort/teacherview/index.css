@@ -30,3 +30,8 @@
   flex-direction: row;
   gap: 1rem;
 }
+
+.teacher-cohorts .card {
+  width: 150%;
+  max-width: none;
+}

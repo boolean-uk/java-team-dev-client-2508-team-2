@@ -47,14 +47,16 @@ const CohortPageTeacher = () => {
   return (
     <>
       <main>
-        <Card>
-          <h2 className="cohorts-title">Cohorts</h2>
-          <div className="cohortspage-row">
-            <CohortList cohorts={cohorts} />
+        <div className="teacher-cohorts">
+          <Card>
+            <h2 className="cohorts-title">Cohorts</h2>
+            <div className="cohortspage-row">
+              <CohortList cohorts={cohorts} />
 
-            <CohortMemberList members={students} title="Students" cohort={cohort} />
-          </div>
-        </Card>
+              <CohortMemberList members={students} title="Students" cohort={cohort} />
+            </div>
+          </Card>
+        </div>
 
         <div className="teacher-content">
           <StudentInfo />
