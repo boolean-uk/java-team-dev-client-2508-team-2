@@ -2,8 +2,7 @@ h2 {
   border-bottom: 1px solid var(--color-blue5);
 }
 
-main {
-  width: 150%;
+.teacher-content main {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -12,7 +11,7 @@ main {
 }
 
 .teacher-content .card {
-  width: 100%;
+  width: 150%;
   max-width: none;
 }
 
