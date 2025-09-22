@@ -57,3 +57,8 @@
     margin: 0;
     font-weight: 400;
 }
+
+.myCohort{
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-blue5);
+}
