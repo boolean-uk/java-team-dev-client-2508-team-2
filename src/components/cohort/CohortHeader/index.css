@@ -1,0 +1,12 @@
+.cohort-header-title {
+    font-weight: 600;
+    color: var(--color-darkblue);
+}
+
+.cohort-header-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    top: -18px;
+}
