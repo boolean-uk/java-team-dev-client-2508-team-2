@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button';
 import Form from '../../components/form';
 import TextInput from '../../components/form/textInput';
@@ -7,9 +8,10 @@ import useModal from '../../hooks/useModal';
 import { createCohort } from '../../service/apiClient';
 import './style.css';
 
-const CohortCreation = () => {
+const CohortCreation = ({ setLoading }) => {
   const { token } = useAuth();
   const { closeModal } = useModal();
+  const navigate = useNavigate();
 
   const [specialisations, setSpecialisations] = useState([]);
   const [step] = useState(1);
@@ -48,7 +50,11 @@ const CohortCreation = () => {
 
   const onAddCohort = () => {
     createCohort(cohort.name, Number(cohort.specialisation), cohort.startDate, cohort.endDate)
-      .then(() => {
+      .then((res) => {
+        const newCohortId = res.data.cohort.id;
+        setLoading(true);
+
+        navigate(`/cohort/${newCohortId}`);
         closeModal();
       })
       .catch((error) => {

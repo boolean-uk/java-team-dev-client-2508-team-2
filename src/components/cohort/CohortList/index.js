@@ -5,14 +5,14 @@ import useModal from '../../../hooks/useModal';
 import './index.css';
 import CohortCreation from '../../addCohortModule';
 
-const CohortList = ({ cohorts }) => {
+const CohortList = ({ cohorts, setLoading }) => {
   const { openModal, setModal } = useModal();
 
   const { cohortId } = useParams();
   const navigate = useNavigate();
 
   const addCohortModal = () => {
-    setModal('Add Cohort', <CohortCreation />);
+    setModal('Add Cohort', <CohortCreation setLoading={setLoading} />);
     openModal();
   };
 
