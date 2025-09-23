@@ -1,18 +1,24 @@
 import CohortIcon from '../../../assets/icons/cohortIconSpecialisationIcon';
 import Button from '../../../components/button';
 import { useParams, useNavigate } from 'react-router-dom';
+import useModal from '../../../hooks/useModal';
 import './index.css';
+import CohortCreation from '../../addCohortModule';
 
 const CohortList = ({ cohorts }) => {
+  const { openModal, setModal } = useModal();
+
   const { cohortId } = useParams();
   const navigate = useNavigate();
+
+  const addCohortModal = () => {
+    setModal('Add Cohort', <CohortCreation />);
+    openModal();
+  };
+
   return (
     <div className="cohort-list-container">
-      <Button
-        classes="offwhite cohort"
-        text="add cohort"
-        onClick={() => alert('Create Cohort clicked!')}
-      />
+      <Button classes="offwhite cohort" text="add cohort" onClick={addCohortModal} />
 
       <div className="cohort-list">
         {cohorts.map((cohort) => (
