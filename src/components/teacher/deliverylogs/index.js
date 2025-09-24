@@ -32,6 +32,16 @@ const DeliveryLogs = ({ cohortId, showForm, setShowForm, searchTerm }) => {
     const handleSave = async () => {
         if (!newLog.title.trim() || !newLog.content.trim()) return;
         try {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, "0");
+            const day = String(now.getDate()).padStart(2, "0");
+            const hours = String(now.getHours()).padStart(2, "0");
+            const minutes = String(now.getMinutes()).padStart(2, "0");
+            const seconds = String(now.getSeconds()).padStart(2, "0");
+
+            const localDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+
             const res = await fetch(
                 `http://localhost:4000/logs/cohorts/${cohortId}`,
                 {
@@ -43,7 +53,7 @@ const DeliveryLogs = ({ cohortId, showForm, setShowForm, searchTerm }) => {
                     body: JSON.stringify({
                         title: newLog.title,
                         content: newLog.content,
-                        date: new Date().toISOString(),
+                        date: localDateTime,
                     }),
                 }
             );
@@ -102,7 +112,7 @@ const DeliveryLogs = ({ cohortId, showForm, setShowForm, searchTerm }) => {
                                         month: "2-digit",
                                         year: "numeric",
                                     })}{" "}
-                                    {new Date(log.date).toLocaleTimeString([], {
+                                    {new Date(log.date).toLocaleTimeString("nl-NL", {
                                         hour: "2-digit",
                                         minute: "2-digit",
                                         hour12: false,
