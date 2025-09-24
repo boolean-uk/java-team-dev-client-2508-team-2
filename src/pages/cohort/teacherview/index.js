@@ -45,7 +45,7 @@ const CohortPageTeacher = () => {
     };
 
     fetchCohorts();
-  }, [token, cohortId]);
+  }, [token, cohortId, loading]);
 
   if (loading) return <p>Loading...</p>;
 

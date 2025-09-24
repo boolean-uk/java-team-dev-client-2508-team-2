@@ -108,7 +108,7 @@ const StudentInfo = () => {
           <label>Course</label>
           <select value={selectedCourse} disabled>
             {cohorts.map((cohort) => (
-              <option key={cohort.specialisation.id} value={cohort.specialisation.id}>
+              <option key={cohort.id} value={cohort.specialisation.id}>
                 {cohort.specialisation.name}
               </option>
             ))}

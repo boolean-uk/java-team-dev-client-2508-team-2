@@ -19,6 +19,15 @@ async function createProfile(userId, firstName, lastName, phone, githubUrl, bio)
   });
 }
 
+async function createCohort(name, specialisationId, startDate, endDate) {
+  return await post('cohorts', {
+    name,
+    specialisationId,
+    startDate,
+    endDate
+  });
+}
+
 async function getPosts() {
   const res = await get('posts');
   return res.data.posts;
@@ -66,4 +75,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile };
+export { login, getPosts, register, createProfile, createCohort };

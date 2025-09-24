@@ -1,0 +1,68 @@
+.add-cohort-main { 
+  padding: 0;
+} 
+
+.add-cohorts-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; 
+  margin-bottom: 2rem;
+}
+
+.add-cohorts-inputs label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-blue1, #333);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.add-cohorts-inputs input,
+.add-cohorts-inputs select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  background-color: #f8f9fc;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.add-cohorts-inputs input:focus,
+.add-cohorts-inputs select:focus {
+  border-color: var(--color-blue1, #3a57e8);
+  background-color: #fff;
+}
+
+.stepper-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.stepper-buttons .offwhite {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.stepper-buttons .blue {
+  background: var(--color-blue1, #3a57e8);
+  color: #fff;
+  border: none;
+}
+
+.stepper-buttons button {
+  min-width: 120px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.stepper-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
