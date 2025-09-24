@@ -43,14 +43,12 @@ const CohortMemberCard = ({ profile, index, subtitle, cohorts, setLoading }) => 
           {cohorts
             // .filter((cohort) => cohort.id !== profile.cohort.id)
             .map((cohort) => (
-              <>
-                <MenuItem
-                  key={cohort.id}
-                  icon={<SquareBracketsIcon />}
-                  text={`${cohort.specialisation?.name}: ${cohort.name ?? 'cohort ' + cohort.id}`}
-                  onClick={() => clickMoveCohort(cohort.id)}
-                />
-              </>
+              <MenuItem
+                key={cohort.id}
+                icon={<SquareBracketsIcon />}
+                text={`${cohort.specialisation?.name}: ${cohort.name ?? 'cohort ' + cohort.id}`}
+                onClick={() => clickMoveCohort(cohort.id)}
+              />
             ))}
         </MenuItem>
       </Menu>,
