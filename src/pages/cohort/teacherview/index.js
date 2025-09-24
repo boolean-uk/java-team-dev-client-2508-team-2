@@ -50,7 +50,7 @@ const CohortPageTeacher = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <main>
+    <main className='teacher-main'>
       <div className="teacher-cohorts">
         <Card>
           <h2 className="cohorts-title">Cohorts</h2>
