@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
-import SearchIcon from '../../../assets/icons/searchIcon';
 import useAuth from '../../../hooks/useAuth';
 
 const NotesPanel = ({ student }) => {
@@ -114,9 +113,6 @@ const NotesPanel = ({ student }) => {
       ) : (
         <>
           <div className="search-wrapper">
-            <span className="search-icon">
-              <SearchIcon width={12} height={12} />
-            </span>
             <input
               type="text"
               placeholder="Search notes"

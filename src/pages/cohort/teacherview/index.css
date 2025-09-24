@@ -1,3 +1,8 @@
+.teacher-main {
+  background-color: #f0f5fa;
+  width: 150%;
+}
+
 .cohorts-title {
   border-bottom: 1px solid var(--color-blue5);
 }
@@ -8,11 +13,6 @@
   gap: 1.5rem;
   padding: 0 2rem;
   box-sizing: border-box;
-}
-
-.teacher-content .card {
-  width: 150%;
-  max-width: none;
 }
 
 .teacher-content .student-info-content {
@@ -31,7 +31,66 @@
   gap: 1rem;
 }
 
-.teacher-cohorts .card {
-  width: 150%;
-  max-width: none;
+.teacher-logs .logs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-blue5);
+  padding-bottom: 0.5rem;
+}
+
+.logs-header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.logs-search {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--color-blue5);
+  border-radius: 4px;
+}
+
+.teacher-logs .logs-subheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-blue5);
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.teacher-logs .logs-subheader h3 {
+  margin: 0;
+  padding-right: 1rem;
+  border-right: 1px solid var(--color-blue5);
+}
+
+.logs-cohort-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.add-btn {
+  background: var(--color-blue5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.teacher-logs .logs-layout {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 1rem;
+}
+
+.teacher-logs .logs-delivery {
+  padding-left: 1rem;
 }
