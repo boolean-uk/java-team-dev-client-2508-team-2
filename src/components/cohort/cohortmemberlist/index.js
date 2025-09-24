@@ -3,7 +3,7 @@ import CohortMemberCard from '../CohortMemberCard';
 import './index.css';
 import CohortIcon from '../../../assets/icons/cohortIconSpecialisationIcon';
 
-const CohortMemberList = ({ members, title, tracks, cohort, cohorts }) => {
+const CohortMemberList = ({ members, title, tracks, cohort, cohorts, setLoading }) => {
   return (
     <div className="cohort-member-list">
       {title === 'Students' && (
@@ -35,6 +35,7 @@ const CohortMemberList = ({ members, title, tracks, cohort, cohorts }) => {
             index={index}
             subtitle={tracks ? tracks[member.id] : null}
             cohorts={cohorts}
+            setLoading={setLoading}
           />
         ))}
       </div>

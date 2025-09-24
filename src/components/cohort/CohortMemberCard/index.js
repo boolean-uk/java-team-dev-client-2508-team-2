@@ -1,24 +1,23 @@
 import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-// import AddIcon from '../../../assets/icons/addIcon';
 import CohortIcon from '../../../assets/icons/cohortIcon';
-// import CohortIconFill from '../../../assets/icons/cohortIcon-fill';
-// import DeleteIcon from '../../../assets/icons/deleteIcon';
-// import MonitorIcon from '../../../assets/icons/monitorIcon';
 import ProfileIcon from '../../../assets/icons/profileIcon';
 import SquareBracketsIcon from '../../../assets/icons/squareBracketsIcon';
 import Menu from '../../menu';
 import MenuItem from '../../menu/menuItem';
 import './index.css';
+import { setCohort } from '../../../service/apiClient';
 
-const CohortMemberCard = ({ profile, index, subtitle, cohorts }) => {
+const CohortMemberCard = ({ profile, index, subtitle, cohorts, setLoading }) => {
   if (!profile) return null;
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const editIconRef = useRef(null);
 
-  const clickMoveCohort = (id) => {
-    console.log('clicked move to cohrot ', id);
+  const clickMoveCohort = (cohortId) => {
+    setCohort(profile.id, cohortId);
+    setIsMenuVisible(false);
+    setLoading(true);
   };
 
   const initials = `${profile.firstName?.[0] || ''}${profile.lastName?.[0] || ''}`.toUpperCase();
@@ -39,31 +38,21 @@ const CohortMemberCard = ({ profile, index, subtitle, cohorts }) => {
         }}
       >
         <MenuItem icon={<ProfileIcon />} text="Profile" />
-        {/* <MenuItem icon={<AddIcon />} text="Add note" /> */}
 
         <MenuItem icon={<CohortIcon />} text="Move to cohort">
-          {cohorts.map((cohort, index) => (
-            <MenuItem
-              key={index}
-              icon={<SquareBracketsIcon />}
-              text={`${cohort.specialisation?.name}: ${cohort.name ?? 'cohort ' + cohort.id}`}
-              onClick={() => clickMoveCohort(cohort.id)}
-            />
-          ))}
-          {/* <MenuItem icon={<SquareBracketsIcon />} text="Software Development">
-            <MenuItem icon={<CohortIconFill />} text="Cohort 1" />
-            <MenuItem icon={<CohortIconFill />} text="Cohort 2" />
-            <MenuItem icon={<CohortIconFill />} text="Cohort 3" />
-          </MenuItem>
-
-          <MenuItem icon={<MonitorIcon />} text="Frontend Development">
-            <MenuItem icon={<CohortIconFill />} text="Cohort 1" />
-            <MenuItem icon={<CohortIconFill />} text="Cohort 2" />
-            <MenuItem icon={<CohortIconFill />} text="Cohort 3" />
-          </MenuItem> */}
+          {cohorts
+            // .filter((cohort) => cohort.id !== profile.cohort.id)
+            .map((cohort) => (
+              <>
+                <MenuItem
+                  key={cohort.id}
+                  icon={<SquareBracketsIcon />}
+                  text={`${cohort.specialisation?.name}: ${cohort.name ?? 'cohort ' + cohort.id}`}
+                  onClick={() => clickMoveCohort(cohort.id)}
+                />
+              </>
+            ))}
         </MenuItem>
-
-        {/* <MenuItem icon={<DeleteIcon />} text="Delete student" /> */}
       </Menu>,
       document.body
     );

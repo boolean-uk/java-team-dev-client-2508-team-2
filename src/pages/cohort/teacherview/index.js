@@ -60,6 +60,7 @@ const CohortPageTeacher = () => {
               title="Students"
               cohort={cohort || {}}
               cohorts={cohorts}
+              setLoading={setLoading}
             />
           </div>
         </Card>
