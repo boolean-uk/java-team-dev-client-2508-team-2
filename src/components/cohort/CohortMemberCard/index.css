@@ -8,6 +8,33 @@
     transition: background 0.2s;
 }
 
+.cohort-member-card .edit-icon{
+    margin-left: auto; 
+  cursor: pointer;
+}
+
+.edit-icon {
+  position: relative;
+  cursor: pointer;
+}
+/* 
+.edit-circle-menu {
+  margin-left: 65px;
+  z-index: 1000;  
+} */
+
+
+.edit-circle-menu {
+  position: absolute;  /* removed from normal flow */
+  top: 100%;           /* directly below the icon */
+  right: 0;            /* align to right edge of icon */
+  margin-top: 0.25rem; /* small gap */
+  z-index: 9000;       /* make sure it appears above everything */
+  background: rgb(243, 0, 0);   /* or whatever your menu bg is */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+
 .cohort-member-card:hover {
     background: #f1f1f1;
 }
