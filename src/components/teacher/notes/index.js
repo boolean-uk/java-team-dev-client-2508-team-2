@@ -19,7 +19,6 @@ const NotesPanel = ({ student }) => {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
-        console.log('Fetched notes:', data);
         setNotes(data.data?.data || []);
       } catch (err) {
         console.error('Error fetching notes:', err);
