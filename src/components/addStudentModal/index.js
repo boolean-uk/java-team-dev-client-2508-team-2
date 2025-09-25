@@ -58,7 +58,7 @@ const AddStudentModal = ({ setLoading }) => {
       <Stepper onComplete={onAddStudent} errorMessage={err}>
         <StepOne data={student} setData={onChange} />
         <StepTwo data={student} setData={onChange} locked={false} />
-        <StepThree data={student} setData={onChange} />
+        <StepThree data={student} setData={onChange} locked={false} />
         <StepFour data={student} setData={onChange} />
       </Stepper>
     </>
