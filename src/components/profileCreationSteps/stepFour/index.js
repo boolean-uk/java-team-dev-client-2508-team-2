@@ -1,4 +1,4 @@
-import Form from '../../../components/form';
+import Form from '../../form';
 
 const StepFour = ({ data, setData }) => {
   return (

@@ -28,6 +28,23 @@ async function createCohort(name, specialisationId, startDate, endDate) {
   });
 }
 
+async function createUser(user) {
+  return await post('users', {
+    userId: user.userId,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    phone: user.phone,
+    githubUrl: user.githubUrl,
+    bio: user.bio,
+    email: user.email,
+    password: user.password,
+    roles: user.roles,
+    cohortId: user.cohortId,
+    specialisationId: user.specialisationId,
+    jobTitle: user.jobTitle
+  });
+}
+
 async function getPosts() {
   const res = await get('posts');
   return res.data.posts;

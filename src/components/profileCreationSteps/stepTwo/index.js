@@ -1,5 +1,5 @@
-import Form from '../../../components/form';
-import TextInput from '../../../components/form/textInput';
+import Form from '../../form';
+import TextInput from '../../form/textInput';
 
 const StepTwo = ({ data, setData }) => {
   return (
@@ -17,6 +17,13 @@ const StepTwo = ({ data, setData }) => {
             type="locked"
           />
           <TextInput onChange={setData} value={data.phone} name="phone" label={'Phone'} />
+          <TextInput
+            type="password"
+            onChange={setData}
+            value={data.password}
+            name="password"
+            label={'Password*'}
+          />
           <p className="text-blue1">*Required</p>
         </div>
       </Form>

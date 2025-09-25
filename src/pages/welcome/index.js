@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Stepper from '../../components/stepper';
 import useAuth from '../../hooks/useAuth';
-import StepOne from './stepOne';
-import StepTwo from './stepTwo';
+import StepOne from '../../components/profileCreationSteps/stepOne';
+import StepTwo from '../../components/profileCreationSteps/stepTwo';
 import './style.css';
-import StepThree from './stepThree';
-import StepFour from './stepFour';
+import StepThree from '../../components/profileCreationSteps/stepThree';
+import StepFour from '../../components/profileCreationSteps/stepFour';
 
 const Welcome = () => {
   const { onCreateProfile, user } = useAuth();
@@ -18,10 +18,10 @@ const Welcome = () => {
     githubUsername: '',
     bio: '',
     role: 'Student',
-    specialism: 'Software Developer',
-    cohort: 'Cohort 4',
-    startDate: 'January 2023',
-    endDate: 'June 2023'
+    specialism: 'Not yet assigned',
+    cohort: 'Not yet assigned',
+    startDate: 'Not yet assigned',
+    endDate: 'Not yet assigned'
   });
 
   const [canStep, setCanStep] = useState(false);
