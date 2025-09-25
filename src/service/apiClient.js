@@ -39,8 +39,8 @@ async function createUser(user) {
     email: user.email,
     password: user.password,
     roles: user.roles,
-    cohortId: user.cohortId,
-    specialisationId: user.specialisationId,
+    cohortId: Number(user.cohortId),
+    specialisationId: Number(user.specialisationId),
     jobTitle: user.jobTitle
   });
 }
@@ -92,4 +92,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, createCohort };
+export { login, getPosts, register, createProfile, createCohort, createUser, get };

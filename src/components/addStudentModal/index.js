@@ -18,10 +18,11 @@ const AddStudentModal = ({ setLoading }) => {
     bio: '',
     email: '',
     password: '',
-    cohort: '',
-    specialisation: '',
+    cohortId: 0,
+    specialisationId: 0,
     jobTitle: ''
   });
+  const [err, setErr] = useState(false);
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -32,39 +33,35 @@ const AddStudentModal = ({ setLoading }) => {
   };
 
   const onAddStudent = () => {
+    if (
+      student.firstName === '' ||
+      student.lastName === '' ||
+      student.email === '' ||
+      student.password === ''
+    ) {
+      setErr('You are missing a required field');
+      setTimeout(() => setErr(''), 3000);
+      return;
+    }
     createUser(student)
       .then((res) => {
-        setLoading(true);
         closeModal();
       })
       .catch((error) => {
-        console.error('Error creating student:', error);
+        setErr(error.message);
+        setTimeout(() => setErr(''), 3000);
       });
   };
 
   return (
-    <main className="welcome">
-      <div className="welcome-titleblock">
-        <h1 className="h2">Welcome to Cohort Manager</h1>
-        <p className="text-blue1">Create your profile to get started</p>
-      </div>
-
-      <Stepper header={<WelcomeHeader />} onComplete={onAddStudent}>
+    <>
+      <Stepper onComplete={onAddStudent} errorMessage={err}>
         <StepOne data={student} setData={onChange} />
-        <StepTwo data={student} setData={onChange} />
+        <StepTwo data={student} setData={onChange} locked={false} />
         <StepThree data={student} setData={onChange} />
         <StepFour data={student} setData={onChange} />
       </Stepper>
-    </main>
-  );
-};
-
-const WelcomeHeader = () => {
-  return (
-    <div className="welcome-cardheader">
-      <h2>Add new student</h2>
-      <p className="text-blue1">Create a new student profile</p>
-    </div>
+    </>
   );
 };
 

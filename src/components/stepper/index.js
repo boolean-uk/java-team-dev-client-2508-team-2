@@ -4,7 +4,7 @@ import Button from '../button';
 import './style.css';
 import { useState } from 'react';
 
-const Stepper = ({ header, children, onComplete, stepCondition = true }) => {
+const Stepper = ({ header, children, onComplete, stepCondition = true, errorMessage }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const onBackClick = () => {
@@ -30,7 +30,7 @@ const Stepper = ({ header, children, onComplete, stepCondition = true }) => {
       </div>
 
       {children[currentStep]}
-
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="stepper-buttons">
         <Button text="Back" classes="offwhite" onClick={onBackClick} />
         <Button
