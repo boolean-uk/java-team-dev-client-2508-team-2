@@ -37,7 +37,7 @@ const CohortMemberCard = ({ profile, index, subtitle, cohorts, setLoading }) => 
           zIndex: 9999
         }}
       >
-        <MenuItem icon={<ProfileIcon />} text="Profile" />
+        <MenuItem icon={<ProfileIcon />} text="Profile" linkTo={`/users/${profile.id}/profiles`} />
 
         <MenuItem icon={<CohortIcon />} text="Move to cohort">
           {cohorts
