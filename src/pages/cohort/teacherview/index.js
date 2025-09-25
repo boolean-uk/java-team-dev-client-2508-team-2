@@ -54,8 +54,14 @@ const CohortPageTeacher = () => {
         <Card>
           <h2 className="cohorts-title">Cohorts</h2>
           <div className="cohortspage-row">
-            <CohortList cohorts={cohorts} />
-            <CohortMemberList members={students} title="Students" cohort={cohort} />
+            <CohortList cohorts={cohorts} setLoading={setLoading} />
+            <CohortMemberList
+              members={students}
+              title="Students"
+              cohort={cohort || {}}
+              cohorts={cohorts}
+              setLoading={setLoading}
+            />
           </div>
         </Card>
       </div>

@@ -2,7 +2,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  /* z-index: 2; */
+    z-index: 9000;       /* make sure it appears above everything */
+
 }
 .menu ul {
   width: 392px;

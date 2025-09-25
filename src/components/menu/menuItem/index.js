@@ -3,8 +3,8 @@ import ArrowRightIcon from '../../../assets/icons/arrowRightIcon';
 
 const MenuItem = ({ icon, text, children, linkTo = '#nogo', onClick = () => {} }) => {
   return (
-    <li>
-      <NavLink to={linkTo} onClick={onClick}>
+    <li onClick={onClick}>
+      <NavLink to={linkTo}>
         {icon}
         <p>{text}</p>
         {children && <ArrowRightIcon />}

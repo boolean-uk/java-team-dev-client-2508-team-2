@@ -9,7 +9,7 @@ import AddIcon from '../../../assets/icons/addIcon';
 import DeleteIcon from '../../../assets/icons/deleteIcon';
 import useModal from '../../../hooks/useModal';
 
-const CohortMemberList = ({ members, title, tracks, cohort }) => {
+const CohortMemberList = ({ members, title, tracks, cohort, cohorts, setLoading }) => {
   const { openModal, setModal } = useModal();
   const [isCohortMenuVisible, setIsCohortMenuVisible] = useState(false);
   const editIconRef = useRef(null);
@@ -78,6 +78,8 @@ const CohortMemberList = ({ members, title, tracks, cohort }) => {
             profile={member}
             index={index}
             subtitle={tracks ? tracks[member.id] : null}
+            cohorts={cohorts}
+            setLoading={setLoading}
           />
         ))}
       </div>
