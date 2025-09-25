@@ -9,31 +9,18 @@ import { useParams } from 'react-router-dom';
 import DeliveryLogs from '../../../components/teacher/deliverylogs';
 import CohortListNoAdd from '../../../components/cohort/CohortListNoAdd';
 import CohortHeader from '../../../components/cohort/CohortHeader';
-import useModal from '../../../hooks/useModal';
-import AddStudentModal from '../../../components/addStudentModal';
-import Menu from '../../../components/menu';
-import MenuItem from '../../../components/menu/menuItem';
-import AddIcon from '../../../assets/icons/addIcon';
-import DeleteIcon from '../../../assets/icons/deleteIcon';
 
 const CohortPageTeacher = () => {
   const { cohortId } = useParams();
   const { token } = useAuth();
-  const { openModal, setModal } = useModal();
 
   const [cohorts, setCohorts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [students, setStudents] = useState([]);
   const [showLogForm, setShowLogForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isCohortMenuVisible] = useState(false);
 
   const cohort = cohorts.find((c) => c.id === Number(cohortId));
-
-  const showModal = () => {
-    setModal('Add student', <AddStudentModal />);
-    openModal();
-  };
 
   useEffect(() => {
     const fetchCohorts = async () => {
@@ -105,10 +92,6 @@ const CohortPageTeacher = () => {
                     <button className="add-btn" onClick={() => setShowLogForm((prev) => !prev)}>
                       {showLogForm ? '×' : '+'}
                     </button>
-                    <div className="menu-icon">
-                      <p onClick={showModal}>...</p>
-                      {isCohortMenuVisible && <CohortMenu />}
-                    </div>
                   </>
                 )}
               </div>
@@ -123,15 +106,6 @@ const CohortPageTeacher = () => {
         </Card>
       </div>
     </main>
-  );
-};
-
-const CohortMenu = () => {
-  return (
-    <Menu>
-      <MenuItem icon={<AddIcon />} text="Add new student" />
-      <MenuItem icon={<DeleteIcon />} text="Delete cohort" />
-    </Menu>
   );
 };
 
