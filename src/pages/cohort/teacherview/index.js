@@ -10,7 +10,6 @@ import DeliveryLogs from '../../../components/teacher/deliverylogs';
 import CohortListNoAdd from '../../../components/cohort/CohortListNoAdd';
 import CohortHeader from '../../../components/cohort/CohortHeader';
 
-
 const CohortPageTeacher = () => {
   const { cohortId } = useParams();
   const { token } = useAuth();
@@ -19,7 +18,7 @@ const CohortPageTeacher = () => {
   const [loading, setLoading] = useState(true);
   const [students, setStudents] = useState([]);
   const [showLogForm, setShowLogForm] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const cohort = cohorts.find((c) => c.id === Number(cohortId));
 
@@ -50,13 +49,19 @@ const CohortPageTeacher = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <main className='teacher-main'>
+    <main className="teacher-main">
       <div className="teacher-cohorts">
         <Card>
           <h2 className="cohorts-title">Cohorts</h2>
           <div className="cohortspage-row">
-            <CohortList cohorts={cohorts} />
-            <CohortMemberList members={students} title="Students" cohort={cohort} />
+            <CohortList cohorts={cohorts} setLoading={setLoading} />
+            <CohortMemberList
+              members={students}
+              title="Students"
+              cohort={cohort || {}}
+              cohorts={cohorts}
+              setLoading={setLoading}
+            />
           </div>
         </Card>
       </div>
@@ -90,11 +95,8 @@ const CohortPageTeacher = () => {
                 {cohort && (
                   <>
                     <CohortHeader cohort={cohort} />
-                    <button
-                      className="add-btn"
-                      onClick={() => setShowLogForm((prev) => !prev)}
-                    >
-                      {showLogForm ? "×" : "+"}
+                    <button className="add-btn" onClick={() => setShowLogForm((prev) => !prev)}>
+                      {showLogForm ? '×' : '+'}
                     </button>
                   </>
                 )}

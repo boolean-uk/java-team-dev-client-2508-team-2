@@ -28,6 +28,10 @@ async function createCohort(name, specialisationId, startDate, endDate) {
   });
 }
 
+async function setCohort(userId, cohortId) {
+  return await put(`users/${userId}/cohort/${cohortId}`);
+}
+
 async function getPosts() {
   const res = await get('posts');
   return res.data.posts;
@@ -35,6 +39,10 @@ async function getPosts() {
 
 async function post(endpoint, data, auth = true) {
   return await request('POST', endpoint, data, auth);
+}
+
+async function put(endpoint, data, auth = true) {
+  return await request('PUT', endpoint, data, auth);
 }
 
 async function patch(endpoint, data, auth = true) {
@@ -75,4 +83,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, createCohort };
+export { login, getPosts, register, createProfile, createCohort, setCohort };

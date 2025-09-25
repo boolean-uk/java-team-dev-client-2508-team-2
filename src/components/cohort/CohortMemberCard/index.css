@@ -8,6 +8,17 @@
     transition: background 0.2s;
 }
 
+.cohort-member-card .edit-icon{
+    margin-left: auto; 
+  cursor: pointer;
+}
+
+.edit-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+
 .cohort-member-card:hover {
     background: #f1f1f1;
 }
