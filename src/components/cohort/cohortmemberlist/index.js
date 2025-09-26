@@ -1,9 +1,44 @@
-import React from 'react';
+import { useRef, useState } from 'react';
 import CohortMemberCard from '../CohortMemberCard';
 import './index.css';
 import CohortIcon from '../../../assets/icons/cohortIconSpecialisationIcon';
+import AddStudentModal from '../../addStudentModal';
+import Menu from '../../menu';
+import MenuItem from '../../menu/menuItem';
+import AddIcon from '../../../assets/icons/addIcon';
+import DeleteIcon from '../../../assets/icons/deleteIcon';
+import useModal from '../../../hooks/useModal';
 
 const CohortMemberList = ({ members, title, tracks, cohort, cohorts, setLoading }) => {
+  const { openModal, setModal } = useModal();
+  const [isCohortMenuVisible, setIsCohortMenuVisible] = useState(false);
+  const editIconRef = useRef(null);
+
+  const showAddStudentModal = () => {
+    setModal('Add student', <AddStudentModal />);
+    openModal();
+  };
+
+  const CohortMenu = ({ anchorRef }) => {
+    if (!anchorRef?.current) return null;
+
+    const rect = anchorRef.current.getBoundingClientRect();
+
+    return (
+      <Menu
+        style={{
+          position: 'absolute',
+          top: rect.bottom + window.scrollY,
+          left: rect.right + window.scrollX - 392,
+          zIndex: 9999
+        }}
+      >
+        <MenuItem icon={<AddIcon />} text="Add new student" onClick={showAddStudentModal} />
+        <MenuItem icon={<DeleteIcon />} text="Delete cohort" />
+      </Menu>
+    );
+  };
+
   return (
     <div className="cohort-member-list">
       {title === 'Students' && (
@@ -20,6 +55,14 @@ const CohortMemberList = ({ members, title, tracks, cohort, cohorts, setLoading 
                   ? `${cohort.startDate} – ${cohort.endDate}`
                   : 'No dates set'}
               </p>
+            </div>
+            <div
+              className="menu-icon last"
+              onClick={() => setIsCohortMenuVisible(!isCohortMenuVisible)}
+              ref={editIconRef}
+            >
+              <p>...</p>
+              {isCohortMenuVisible && <CohortMenu anchorRef={editIconRef} />}
             </div>
           </div>
         </div>
