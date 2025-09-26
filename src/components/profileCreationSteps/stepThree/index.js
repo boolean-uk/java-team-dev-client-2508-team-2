@@ -14,7 +14,7 @@ const StepThree = ({ data, setData, locked = true }) => {
       const result = await get('specialisations');
       setSpecialisations(result.data.specialisations);
       const cohortResult = await get('cohorts');
-      setCohorts(cohortResult.data.cohorts);
+      setCohorts(cohortResult.data.cohorts || []);
     };
     fetchData();
   }, []);

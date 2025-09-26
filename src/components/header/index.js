@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 import { getProfile } from '../../service/apiClient';
 
 const Header = () => {
-  const { token, onLogout } = useAuth();
+  const { user, token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [profile, setProfile] = useState(null);
   const { user } = useAuth();
@@ -70,7 +70,7 @@ const Header = () => {
             <section className="user-panel-options border-top">
               <ul>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to={`/users/${user.id}/profile`}>
                     <ProfileIcon /> <p>Profile</p>
                   </NavLink>
                 </li>
