@@ -6,11 +6,15 @@ import ProfileIcon from '../../assets/icons/profileIcon';
 import CogIcon from '../../assets/icons/cogIcon';
 import LogoutIcon from '../../assets/icons/logoutIcon';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getProfile } from '../../service/apiClient';
 
 const Header = () => {
   const { token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [profile, setProfile] = useState(null);
+  const { user } = useAuth();
+  const [initials, setInitials] = useState('');
 
   const onClickProfileIcon = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -20,12 +24,27 @@ const Header = () => {
     return null;
   }
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const profileData = await getProfile(user.id);
+        setProfile(profileData || {});
+        // console.log('Profile data:', profileData);
+        setInitials(`${profileData?.firstName} ${profileData?.lastName}`.match(/\b(\w)/g));
+      } catch (err) {
+        console.error('Error fetching profile:', err);
+      }
+    };
+
+    fetchProfile();
+  }, [user, token]);
+
   return (
     <header>
       <FullLogo textColour="white" />
 
       <div className="profile-icon" onClick={onClickProfileIcon}>
-        <p>AJ</p>
+        <p>{initials}</p>
       </div>
 
       {isMenuVisible && (
@@ -33,12 +52,18 @@ const Header = () => {
           <Card>
             <section className="post-details">
               <div className="profile-icon">
-                <p>AJ</p>
+                <p>{initials}</p>
               </div>
 
               <div className="post-user-name">
-                <p>Alex Jameson</p>
-                <small>Software Developer, Cohort 3</small>
+                <p>
+                  {profile.firstName} {profile.lastName}
+                </p>
+                <small>
+                  {profile.user?.teacher
+                    ? `${profile.jobTitle || 'Software Developer'}, Teacher`
+                    : `${profile.user?.cohort?.name || 'Cohort'}, ${profile.specialisation?.name || ''}`}
+                </small>
               </div>
             </section>
 
