@@ -8,11 +8,13 @@ import Menu from '../../menu';
 import MenuItem from '../../menu/menuItem';
 import './index.css';
 import { setCohort } from '../../../service/apiClient';
+import useAuth from '../../../hooks/useAuth';
 
-const CohortMemberCard = ({ profile, index, subtitle, cohorts, setLoading }) => {
+const CohortMemberCard = ({ profile, index, subtitle, cohorts = [], setLoading }) => {
   if (!profile) return null;
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const editIconRef = useRef(null);
+  const { user } = useAuth();
 
   const clickMoveCohort = (cohortId) => {
     setCohort(profile.id, cohortId);
@@ -38,19 +40,20 @@ const CohortMemberCard = ({ profile, index, subtitle, cohorts, setLoading }) => 
         }}
       >
         <MenuItem icon={<ProfileIcon />} text="Profile" linkTo={`/users/${profile.id}/profile`} />
-
-        <MenuItem icon={<CohortIcon />} text="Move to cohort">
-          {cohorts
-            // .filter((cohort) => cohort.id !== profile.cohort.id)
-            .map((cohort) => (
-              <MenuItem
-                key={cohort.id}
-                icon={<SquareBracketsIcon />}
-                text={`${cohort.specialisation?.name}: ${cohort.name ?? 'cohort ' + cohort.id}`}
-                onClick={() => clickMoveCohort(cohort.id)}
-              />
-            ))}
-        </MenuItem>
+        {user?.teacher && (
+          <MenuItem icon={<CohortIcon />} text="Move to cohort">
+            {cohorts
+              // .filter((cohort) => cohort.id !== profile.cohort.id)
+              .map((cohort) => (
+                <MenuItem
+                  key={cohort.id}
+                  icon={<SquareBracketsIcon />}
+                  text={`${cohort.specialisation?.name}: ${cohort.name ?? 'cohort ' + cohort.id}`}
+                  onClick={() => clickMoveCohort(cohort.id)}
+                />
+              ))}
+          </MenuItem>
+        )}
       </Menu>,
       document.body
     );
