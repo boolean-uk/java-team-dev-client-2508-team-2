@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
 const Header = () => {
-  const { token, onLogout } = useAuth();
+  const { user, token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const onClickProfileIcon = () => {
@@ -19,6 +19,8 @@ const Header = () => {
   if (!token) {
     return null;
   }
+
+  // console.log(user);
 
   return (
     <header>
@@ -45,7 +47,7 @@ const Header = () => {
             <section className="user-panel-options border-top">
               <ul>
                 <li>
-                  <NavLink to="/">
+                  <NavLink to={`/users/${user.id}/profile`}>
                     <ProfileIcon /> <p>Profile</p>
                   </NavLink>
                 </li>
