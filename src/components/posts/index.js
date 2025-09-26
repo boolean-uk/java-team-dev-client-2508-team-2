@@ -14,8 +14,8 @@ const Posts = () => {
       {posts.map((post) => {
         return (
           <Post
-            key={post.id}
-            name={`${post.user.profile.firstName} ${post.user.profile.lastName}`}
+            key={post?.id}
+            name={`${post?.user?.profile?.firstName} ${post?.user?.profile?.lastName}`}
             date={new Date(post.createdAt).toLocaleString('en-GB', {
               dateStyle: 'medium',
               timeStyle: 'short'
