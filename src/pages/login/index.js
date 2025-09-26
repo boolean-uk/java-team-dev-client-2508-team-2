@@ -8,10 +8,20 @@ import './login.css';
 const Login = () => {
   const { onLogin } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onLogin(formData.email, formData.password).catch((err) => {
+      console.error(err.message);
+      setError('Icorrect email or password');
+      setTimeout(() => setError(''), 2000);
+    });
   };
 
   return (
@@ -32,13 +42,10 @@ const Login = () => {
               name="password"
               label={'Password *'}
               type={'password'}
+              errorMessage={error}
             />
           </form>
-          <Button
-            text="Log in"
-            onClick={() => onLogin(formData.email, formData.password)}
-            classes="green width-full"
-          />
+          <Button text="Log in" onClick={onSubmit} classes="green width-full" />
         </div>
       </CredentialsCard>
     </div>
