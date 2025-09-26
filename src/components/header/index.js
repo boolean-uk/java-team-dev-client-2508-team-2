@@ -61,7 +61,7 @@ const Header = () => {
                 <small>
                   {profile.user?.teacher
                     ? `${profile.jobTitle || 'Software Developer'}, Teacher`
-                    : `${profile.user?.cohort?.name || 'Cohort'}, ${profile.specialisation?.name || ''}`}
+                    : `${profile.user?.cohort?.name || 'Cohort'}, ${profile.user?.cohort?.specialisation?.name || ''}`}
                 </small>
               </div>
             </section>

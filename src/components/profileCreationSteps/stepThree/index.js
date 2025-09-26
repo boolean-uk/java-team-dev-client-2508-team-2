@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Form from '../../form';
 import TextInput from '../../form/textInput';
-import { get } from '../../../service/apiClient';
+// import { get } from '../../../service/apiClient';
 import './style.css';
 
 const StepThree = ({ data, setData, locked = true }) => {
@@ -10,13 +10,19 @@ const StepThree = ({ data, setData, locked = true }) => {
   const [filteredCohorts, setFilteredCohorts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await get('specialisations');
-      setSpecialisations(result.data.specialisations);
-      const cohortResult = await get('cohorts');
-      setCohorts(cohortResult.data.cohorts || []);
-    };
-    fetchData();
+    setSpecialisations([]);
+    setCohorts([]);
+    //   const fetchData = async () => {
+    //     try {
+    //       const result = await get('/specialisations');
+    //       setSpecialisations(result.data.specialisations);
+    //       const cohortResult = await get('cohorts');
+    //       setCohorts(cohortResult.data.cohorts || []);
+    //     } catch (error) {
+    //       console.error('Error fetching data in stepThee:', error);
+    //     }
+    // };
+    //   fetchData();
   }, []);
 
   return (
