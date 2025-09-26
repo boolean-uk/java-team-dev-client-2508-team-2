@@ -15,7 +15,6 @@ const CohortMemberList = ({ members, title, tracks, cohort, cohorts, setLoading 
   const editIconRef = useRef(null);
 
   const showAddStudentModal = () => {
-    console.log('clicked');
     setModal('Add student', <AddStudentModal />);
     openModal();
   };
