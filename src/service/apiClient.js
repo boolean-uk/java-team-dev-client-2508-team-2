@@ -19,6 +19,11 @@ async function createProfile(userId, firstName, lastName, phone, githubUrl, bio)
   });
 }
 
+async function getProfile(userId) {
+  const res = await get(`users/${userId}/profile`);
+  return res.data.profile;
+}
+
 async function createCohort(name, specialisationId, startDate, endDate) {
   return await post('cohorts', {
     name,
@@ -100,4 +105,14 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, createCohort, setCohort, createUser, get };
+export {
+  login,
+  getPosts,
+  register,
+  createProfile,
+  createCohort,
+  setCohort,
+  createUser,
+  get,
+  getProfile
+};

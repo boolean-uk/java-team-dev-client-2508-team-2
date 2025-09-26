@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -7,9 +7,13 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import './style.css';
+import { getProfile } from '../../service/apiClient';
+import useAuth from '../../hooks/useAuth';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
+  const { user, token } = useAuth();
+  const [initials, setInitials] = useState('');
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -27,13 +31,26 @@ const Dashboard = () => {
     openModal();
   };
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const profileData = await getProfile(user.id);
+        setInitials(`${profileData?.firstName} ${profileData?.lastName}`.match(/\b(\w)/g));
+      } catch (err) {
+        console.error('Error fetching profile:', err);
+      }
+    };
+
+    fetchProfile();
+  }, [user, token]);
+
   return (
     <>
       <main>
         <Card>
           <div className="create-post-input">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{initials}</p>
             </div>
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
