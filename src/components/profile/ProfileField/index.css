@@ -35,11 +35,10 @@
     color: #1e1e1e;
     resize: none;
     width: 100%;
-    min-height: 120px;
+    min-height: 125px;
+    white-space: pre-wrap;
 }
 
-.profile-textarea:focus {
-    outline: none;
-    border-color: #4f46e5;
-    background-color: #eef3f9;
+.profile-textarea.readonly {
+    pointer-events: none;
 }
