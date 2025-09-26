@@ -15,8 +15,11 @@ const Posts = () => {
         return (
           <Post
             key={post.id}
-            name={`${post.author.firstName} ${post.author.lastName}`}
-            date={post.createdAt}
+            name={`${post.user.profile.firstName} ${post.user.profile.lastName}`}
+            date={new Date(post.createdAt).toLocaleString('en-GB', {
+              dateStyle: 'medium',
+              timeStyle: 'short'
+            })}
             content={post.content}
             comments={post.comments}
           />

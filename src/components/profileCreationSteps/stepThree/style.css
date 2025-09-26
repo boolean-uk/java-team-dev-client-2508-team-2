@@ -1,0 +1,16 @@
+.dropdown {
+  background: var(--color-blue5);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  width: 100%;
+}
+.dropdown:focus {
+  border: 1px solid var(--color-blue2);
+}
+
+select, option {
+  font-family: "Lexend", sans-serif;
+}

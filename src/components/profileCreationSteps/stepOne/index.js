@@ -1,6 +1,6 @@
 import ProfileIcon from '../../../assets/icons/profileIcon';
-import Form from '../../../components/form';
-import TextInput from '../../../components/form/textInput';
+import Form from '../../form';
+import TextInput from '../../form/textInput';
 
 const StepOne = ({ data, setData }) => {
   return (
