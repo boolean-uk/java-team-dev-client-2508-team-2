@@ -13,7 +13,6 @@ const Header = () => {
   const { user, token, onLogout } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [profile, setProfile] = useState(null);
-  const { user } = useAuth();
   const [initials, setInitials] = useState('');
 
   const onClickProfileIcon = () => {
